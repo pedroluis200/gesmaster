@@ -1,0 +1,36 @@
+{{extend 'layout_admin.html'}}
+
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Enviar</strong> documento
+            </div>
+            <div class="card-body card-block">
+                {{=form.custom.begin}}
+
+                {{=form.custom.label.titulo}}
+                <span class="text-danger">*</span>
+                <div class="form-group ">
+                    {{=form.custom.widget.titulo}}
+                </div>
+
+                {{=form.custom.label.documento}}
+                <span class="text-danger">*</span>
+                <div class="form-group">
+                    {{=form.custom.widget.documento}}
+                    <p>
+                        <small>Máxima capacidad: 20 MB</small>
+                        <br>
+                        <small>Solo se aceptan: pdf doc docx</small>
+                    </p>
+                </div>
+
+
+                {{=form.custom.submit}}
+                {{=form.custom.end}}
+            </div>
+        </div>
+    </div>
+</div>

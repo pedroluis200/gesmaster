@@ -1,0 +1,749 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    /* Font Definitions */
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        font-size: 12.0pt;
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    .MsoChpDefault {
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoPapDefault {
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    /* List Definitions */
+    ol {
+        margin-bottom: 0in;
+    }
+
+    ul {
+        margin-bottom: 0in;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-11.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-11 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Dictamen resumen de actividades del programa - Modelo PG 11</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2 row"
+                    style="margin: auto;width: min-content;">
+                    <div class=WordSection1>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:4.75pt;margin-bottom:
+                        .55pt;margin-left:2.0pt'><b><span lang=ES-TRAD>PG-11 </span></b></p>
+
+                        <br>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'>
+                            <span lang=ES-TRAD>CENTRO:
+                                <strong>{{=centro}}</strong> </span>
+                        </p>
+
+                        <br>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD>MAESTRÍA, ESPECIALIDAD O
+                                DIPLOMADO:
+                                <strong>{{=edicion.id_maestria.nombre}}</strong>
+                            </span>
+                        </p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b><span lang=ES-TRAD> </span></b></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:4.7pt;
+                        margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b><span lang=ES-TRAD>RESUMEN
+                                    DE ACTIVIDADES DEL PROGRAMA </span></b><span lang=ES-TRAD> </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:115.95pt;margin-bottom:
+                        0in;margin-left:.85pt;margin-bottom:.0001pt'><b><span lang=ES-TRAD>Edición:</span></b><span
+                                lang=ES-TRAD>
+                                <strong>{{=edicion.numero}}</strong>
+                                               Menciones: </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span
+                                lang=ES-TRAD>____________________________________________________________
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                        margin-left:.85pt;margin-bottom:.0001pt'><span
+                                lang=ES-TRAD>_______________________________________________________________
+                            </span></p>
+                        <br>
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD>Fecha de Inicio del programa:
+                                <strong>
+                                    {{=edicion.fecha_inicio.strftime('%d/%m/%Y')}}
+                                </strong>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD>Fecha Final del programa:
+                                <strong> {{=edicion.fecha_fin.strftime('%d/%m/%Y')}}
+                                </strong>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b><span lang=ES-TRAD> </span></b></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                        margin-left:35.75pt;margin-bottom:.0001pt;text-indent:-35.4pt'><b><span lang=ES-TRAD
+                                    style='line-height:103%'>I-<span
+                                        style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span></span></b><b><span lang=ES-TRAD>ACTIVIDADES LECTIVAS</span></b><span
+                                lang=ES-TRAD>: (Incluyen los cursos o entrenamientos obligatorios, electivos,
+                                libres, etc.)  </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+
+                        <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width=579
+                            style='width:434.5pt;margin-left:-5.4pt;border-collapse:collapse'>
+                            <tr style='height:14.3pt'>
+                                <td width=500 colspan=2 valign=top style='width:375.0pt;border:solid black 1.0pt;
+                          border-right:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Obligatorios
+                                                </span></i></b></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border:solid black 1.0pt;
+                          border-left:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:8.0pt;margin-left:0in;text-align:left;text-indent:0in;
+                          line-height:107%'><span lang=ES-TRAD>&nbsp;</span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:.2in'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:.2in'>
+                                    <p class=MsoNormal style='margin:0in;margin-bottom:.0001pt;text-indent:0in;
+                          line-height:107%'><b><i><span lang=ES-TRAD>Número</span></i></b><span lang=ES-TRAD> </span>
+                                    </p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:.2in'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Cursos
+                                                    o Entrenamientos</span></i></b><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:.2in'>
+                                    <p class=MsoNormal style='margin:0in;margin-bottom:.0001pt;text-indent:0in;
+                          line-height:107%'><b><i><span lang=ES-TRAD>Créditos</span></i></b><span lang=ES-TRAD> </span>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            {{for i, item in enumerate(obligatorias.select()):}}
+
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US>
+                                            {{=i + 1}}
+                                        </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=item.actividad.nombre}}
+                                        </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=item.actividad_edicion.creditos}}
+
+                                        </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:14.3pt'>
+                                <td width=500 colspan=2 valign=top style='width:375.0pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Subtotal
+                                                    de créditos lectivos obligatorios mínimos </span></i></b></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+
+                                        </span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:14.3pt'>
+                                <td width=500 colspan=2 valign=top style='width:375.0pt;border-top:none;
+                          border-left:solid black 1.0pt;border-bottom:solid black 1.0pt;border-right:
+                          none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Optativos
+                                                </span></i></b></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:8.0pt;margin-left:0in;text-align:left;text-indent:0in;
+                          line-height:107%'><span lang=ES-TRAD>&nbsp;</span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin:0in;margin-bottom:.0001pt;text-indent:0in;
+                          line-height:107%'><b><i><span lang=ES-TRAD>Número</span></i></b><span lang=ES-TRAD> </span>
+                                    </p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Cursos
+                                                    o Entrenamientos</span></i></b><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal style='margin:0in;margin-bottom:.0001pt;text-indent:0in;
+                          line-height:107%'><b><i><span lang=ES-TRAD>Créditos</span></i></b><span lang=ES-TRAD> </span>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            {{for i, item in enumerate(optativas.select()):}}
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US>
+                                            {{=i + 1}}
+                                        </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=item.actividad.nombre}}
+                                        </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=item.actividad_edicion.creditos}}
+
+                                        </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:.2in'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:.2in'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:.2in'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:.2in'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:.2in'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:.2in'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=425 valign=top style='width:318.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.4pt;height:.2in'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:.2in'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=500 colspan=2 valign=top style='width:375.0pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Subtotal
+                                                    de créditos lectivos optativos mínimos</span></i></b><span
+                                            lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=500 colspan=2 valign=top style='width:375.0pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Total
+                                                    de créditos lectivos mínimos </span></i></b></p>
+                                </td>
+                                <td width=79 valign=top style='width:59.5pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.4pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'> </p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:35.75pt;text-indent:-35.4pt'><b><span lang=ES-TRAD
+                                    style='line-height:103%'>II-<span
+                                        style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span></span></b><b><span lang=ES-TRAD>ACTIVIDADES NO LECTIVAS:</span></b><span
+                                lang=ES-TRAD> (incluye la memoria escrita) </span></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                        margin-bottom:0in;margin-left:44.75pt;margin-bottom:.0001pt;text-align:center;
+                        text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+
+                        <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width=578
+                            style='width:433.3pt;margin-left:-5.4pt;border-collapse:collapse'>
+                            <tr style='height:.2in'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.3pt;height:.2in'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;text-indent:0in;line-height:107%'><b><i><span
+                                                    lang=ES-TRAD>Número</span></i></b><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=416 valign=top style='width:311.9pt;border:solid black 1.0pt;
+                          border-left:none;padding:0in 2.05pt 0in 5.3pt;height:.2in'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:3.1pt;
+                          margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Descripción de la
+                                                    actividad</span></i></b><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=87 valign=top style='width:65.3pt;border:solid black 1.0pt;
+                          border-left:none;padding:0in 2.05pt 0in 5.3pt;height:.2in'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:2.9pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Créditos</span></i></b><span
+                                            lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            {{for i, item in enumerate(no_lectivas.select()):}}
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=EN-US>
+                                            {{=i + 1}}
+                                        </span></p>
+                                </td>
+                                <td width=416 valign=top style='width:311.9pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=item.actividad.nombre}}
+                                        </span></p>
+                                </td>
+                                <td width=87 valign=top style='width:65.3pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.3pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=item.actividad_edicion.creditos}}
+
+                                        </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=416 valign=top style='width:311.9pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=87 valign=top style='width:65.3pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.3pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=416 valign=top style='width:311.9pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=87 valign=top style='width:65.3pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.3pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=416 valign=top style='width:311.9pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=87 valign=top style='width:65.3pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.3pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=75 valign=top style='width:56.15pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=EN-US> </span></p>
+                                </td>
+                                <td width=416 valign=top style='width:311.9pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=87 valign=top style='width:65.3pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.3pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=491 colspan=2 valign=top style='width:368.05pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 2.05pt 0in 5.3pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><b><i><span lang=ES-TRAD>Total de créditos
+                                                    no lectivos mínimos</span></i></b><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=87 valign=top style='width:65.3pt;border-top:none;border-left:none;
+                          border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0in 2.05pt 0in 5.3pt;
+                          height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+
+                                        </span></p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'> </p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:.15pt;
+                        margin-left:.85pt;line-height:109%'><b><span lang=ES-TRAD>Total de créditos
+                                    mínimos a alcanzar en el Programa de Posgrado:
+                                    _____{{=edicion.creditos_minimos}}______</span>
+                            </b><span lang=ES-TRAD>  </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>             </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                        margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD> _____________________________
+                                    </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD>Coordinador del Comité Académico </span></p>
+
+                        <p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+ <style>
+    /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:5.65pt;
+	margin-left:.5pt;
+	text-align:justify;
+	text-indent:-.5pt;
+	line-height:103%;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";
+	color:black;}
+.MsoChpDefault
+	{font-family:"Calibri","sans-serif";}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:70.85pt 85.05pt 70.85pt 85.05pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+ </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'dictamen_actividades_programa', docStyle);
+    }
+</script>
+{{end page_js}}
+
+{{block datatable}}
+{{end}}

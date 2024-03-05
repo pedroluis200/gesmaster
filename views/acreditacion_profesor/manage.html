@@ -1,0 +1,58 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('crear')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-plus"></i> </span>
+    Añadir
+</a>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gestionar créditos</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Evidencia</th>
+                                <th>Créditos</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for credito in creditos:}}
+                            <tr>
+                                <td>
+                                    <a href="{{=URL('default', 'download', args=credito.evidencia)}}"
+                                        class="btn btn-success" target="_blank">
+                                        <i class="fa fa-download"></i>
+                                        Evidencia
+                                    </a>
+                                </td>
+                                <td>{{=credito.creditos}}</td>
+                                <td>
+                                    <a href="{{=URL('editar', args=credito.id)}}"
+                                        class="btn btn-success btn-rounded text-white mb-2">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" onclick="delete_elem(`{{=URL('eliminar', args=credito.id)}}`)"
+                                        class="btn btn-danger btn-rounded text-white mb-2">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Evidencia</th>
+                                <th>Créditos</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

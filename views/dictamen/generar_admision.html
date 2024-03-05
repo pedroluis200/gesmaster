@@ -1,0 +1,292 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        font-size: 12.0pt;
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    p.MsoCommentText,
+    li.MsoCommentText,
+    div.MsoCommentText {
+        mso-style-link: "Texto comentario Car";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        font-size: 10.0pt;
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    p.MsoAcetate,
+    li.MsoAcetate,
+    div.MsoAcetate {
+        mso-style-link: "Texto de globo Car";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 0in;
+        margin-left: .5pt;
+        margin-bottom: .0001pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        font-size: 9.0pt;
+        font-family: "Segoe UI", "sans-serif";
+        color: black;
+    }
+
+    span.TextocomentarioCar {
+        mso-style-name: "Texto comentario Car";
+        mso-style-link: "Texto comentario";
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    span.TextodegloboCar {
+        mso-style-name: "Texto de globo Car";
+        mso-style-link: "Texto de globo";
+        font-family: "Segoe UI", "sans-serif";
+        color: black;
+    }
+
+    .MsoChpDefault {
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoPapDefault {
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <a href="{{=URL('dictamen_admision')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-02.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-02 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Dictamen de admisión - Modelo PG 02</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2 row" style="margin: auto;width: 600px;">
+                    <div class="WordSection1 col-12">
+                        <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:.15pt;
+                        margin-left:.85pt;line-height:109%'><b><span lang=ES-TRAD>PG-02 </span></b></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b><span lang=ES-TRAD> </span></b></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:.8pt;
+                        margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b><span lang=ES-TRAD>
+                            {{=centro.upper()}}</span></b></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                        margin-bottom:0in;margin-left:4.05pt;margin-bottom:.0001pt;text-align:center;
+                        text-indent:0in;line-height:107%'><b> </b></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:.85pt;
+                        margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b><span lang=ES-TRAD>DICTAMEN
+                                    DE ADMISIÓN  </span></b></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:.2pt'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:103%'>El comité académico del programa de
+                                maestría (x), especialidad de posgrado (   ), diplomado (    )  en: <b>
+                                    {{=admision.id_edicion.id_maestria.nombre}}
+                                </b></span>
+                        </p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:150%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:150%'>en reunión celebrada, aprobó el
+                                ingreso del compañero (a): <b>{{=admision.nombre + ' ' + admision.apellido1 + ' ' +
+                                    admision.apellido2}}</b>
+                                por cumplir los requisitos de ingreso que exige el programa. </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:.2pt'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:103%'>Dado en ___________________a los
+                                _______ días del mes de ______________ de _____ </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:107%'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:.2pt'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:103%'>________________________________________
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:.2pt'><span lang=ES-TRAD
+                                style='font-size:10.0pt;line-height:103%'>COORDINADOR DEL COMITÉ ACADEMICO </span></p>
+
+                        <p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        font-size: 12.0pt;
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    p.MsoCommentText,
+    li.MsoCommentText,
+    div.MsoCommentText {
+        mso-style-link: "Texto comentario Car";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        font-size: 10.0pt;
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    p.MsoAcetate,
+    li.MsoAcetate,
+    div.MsoAcetate {
+        mso-style-link: "Texto de globo Car";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 0in;
+        margin-left: .5pt;
+        margin-bottom: .0001pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        font-size: 9.0pt;
+        font-family: "Segoe UI", "sans-serif";
+        color: black;
+    }
+
+    span.TextocomentarioCar {
+        mso-style-name: "Texto comentario Car";
+        mso-style-link: "Texto comentario";
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    span.TextodegloboCar {
+        mso-style-name: "Texto de globo Car";
+        mso-style-link: "Texto de globo";
+        font-family: "Segoe UI", "sans-serif";
+        color: black;
+    }
+
+    .MsoChpDefault {
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoPapDefault {
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'dictamen_admision', docStyle);
+    }
+</script>
+{{end page_js}}
+
+{{block datatable}}
+{{end}}

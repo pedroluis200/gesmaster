@@ -1,0 +1,732 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+{{end head}}
+
+<div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Editar</strong> datos de admisión
+            </div>
+            <div id="app" class="card-body card-block">
+                <!-- Button control -->
+                <div class="row justify-content-around">
+                    <button class="btn mr-2 mb-2" :class="steps[0] ? disabledClass: activeClass" :disabled="steps[0]">
+                        1. Información personal
+                    </button>
+
+                    <button class="btn mr-2 mb-2" :class="steps[1] ? disabledClass: activeClass" :disabled="steps[1]">
+                        2. Dirección particular
+                    </button>
+
+                    <button class="btn mr-2 mb-2" :class="steps[2] ? disabledClass: activeClass" :disabled="steps[2]">
+                        3. Datos de graduado
+                    </button>
+
+                    <button class="btn mr-2 mb-2" :class="steps[3] ? disabledClass: activeClass" :disabled="steps[3]">
+                        4. Datos laborales
+                    </button>
+                </div>
+
+                <!-- Forms -->
+                <div class="row p-3">
+                    <!-- Información personal -->
+                    <div v-show="step===0" class="col-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name" class=" form-control-label">
+                                        Nombre <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="informacion_personal.nombre" type="text" id="name"
+                                        class="form-control">
+                                    <div class="input-errors" v-if="'informacion_personal' in v$"
+                                        v-for="error of v$.informacion_personal.nombre.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="lastname" class=" form-control-label">
+                                        1er apellido <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="informacion_personal.apellido1" type="text" id="lastname1"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'informacion_personal' in v$"
+                                        v-for="error of v$.informacion_personal.apellido1.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="lastname" class=" form-control-label">
+                                        2do apellido <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="informacion_personal.apellido2" type="text" id="lastname2"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'informacion_personal' in v$"
+                                        v-for="error of v$.informacion_personal.apellido2.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="ci" class=" form-control-label">
+                                        Carné de Identidad
+                                    </label>
+                                    <input v-model="informacion_personal.ci" type="text" id="ci" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="passport" class=" form-control-label">
+                                        Pasaporte
+                                    </label>
+                                    <input v-model="informacion_personal.pasaporte" type="text" id="passport"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="country" class=" form-control-label">
+                                        País <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="informacion_personal.pais" type="text" id="country"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'informacion_personal' in v$"
+                                        v-for="error of v$.informacion_personal.pais.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="genre" class=" form-control-label">
+                                        Sexo
+                                    </label>
+                                    <select name="select" v-model="informacion_personal.sexo" id="genre"
+                                        class="form-control">
+                                        <option disabled value="">Seleccione uno...</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="photoid1" class=" form-control-label">
+                                        Foto del carné de indentidad (Cara 1)
+                                        <span class="text-danger">*</span>
+                                    </label>
+
+                                    <button v-show="!editar_carnet_1" class="btn btn-success"
+                                        @click="editar_carnet_1 = true">
+                                        Editar
+                                    </button>
+
+                                    <div v-show="editar_carnet_1">
+                                        <input type="file" id="photoid1" class="form-control-file"
+                                            accept="image/x-png,image/gif,image/jpeg" @change="handleFotoCarnet1">
+
+                                        <div v-if="error_carnet_1" class="error">La imagen no cumple los requisitos
+                                        </div>
+
+                                        <template v-if="editar_carnet_1">
+                                            <div class="input-errors" v-if="'informacion_personal' in v$"
+                                                v-for="error of v$.informacion_personal.foto_ci_1.$errors"
+                                                :key="error.$uid">
+                                                <div class="error">[[ error.$message ]]</div>
+                                            </div>
+                                        </template>
+
+                                        <small class="form-text text-muted">
+                                            Máximo 1 fichero.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Límite de 512 KB.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Tipos permitidos: png gif jpg jpeg.
+                                        </small>
+
+                                        <button class="btn btn-danger mt-2" @click="editar_carnet_1 = false">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="photoid2" class=" form-control-label">
+                                        Foto del carné de indentidad (Cara 2)
+                                        <span class="text-danger">*</span>
+                                    </label>
+
+                                    <button v-show="!editar_carnet_2" class="btn btn-success"
+                                        @click="editar_carnet_2 = true">
+                                        Editar
+                                    </button>
+
+                                    <div v-show="editar_carnet_2">
+                                        <input type="file" id="photoid2" class="form-control-file"
+                                            accept="image/x-png,image/gif,image/jpeg" @change="handleFotoCarnet2">
+
+                                        <div v-if="error_carnet_2" class="error">La imagen no cumple los requisitos
+                                        </div>
+
+                                        <template v-if="editar_carnet_2">
+                                            <div class="input-errors" v-if="'informacion_personal' in v$"
+                                                v-for="error of v$.informacion_personal.foto_ci_2.$errors"
+                                                :key="error.$uid">
+                                                <div class="error">[[ error.$message ]]</div>
+                                            </div>
+                                        </template>
+
+
+                                        <small class="form-text text-muted">
+                                            Máximo 1 fichero.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Límite de 512 KB.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Tipos permitidos: png gif jpg jpeg.
+                                        </small>
+
+                                        <button class="btn btn-danger mt-2" @click="editar_carnet_2 = false">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dirección particular -->
+                    <div v-show="step===1" class="col-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="street" class=" form-control-label">
+                                        Calle
+                                    </label>
+
+                                    <input v-model="direccion_particular.calle" type="text" id="street"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="apto" class=" form-control-label">
+                                        Apartamento
+                                    </label>
+
+                                    <input v-model="direccion_particular.apto" type="text" id="apto"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="house_number" class=" form-control-label">
+                                        Número (de la residencia)
+                                    </label>
+                                    <input v-model="direccion_particular.numero_residencia" type="text"
+                                        id="house_number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address_between" class=" form-control-label">
+                                        Entre
+                                    </label>
+                                    <input v-model="direccion_particular.entre_direccion" type="text"
+                                        id="address_between" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="state" class=" form-control-label">
+                                        Provincia / Estado <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="direccion_particular.provincia_residencia" type="text" id="state"
+                                        class="form-control">
+
+
+                                    <div class="input-errors" v-if="'direccion_particular' in v$"
+                                        v-for="error of v$.direccion_particular.provincia_residencia.$errors"
+                                        :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="city" class=" form-control-label">
+                                        Municipio / Ciudad <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="direccion_particular.municipio_residencia" type="text" id="city"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'direccion_particular' in v$"
+                                        v-for="error of v$.direccion_particular.municipio_residencia.$errors"
+                                        :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone" class=" form-control-label">
+                                        Teléfono
+                                    </label>
+                                    <input v-model="direccion_particular.telefono" type="text" id="phone"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class=" form-control-label">
+                                        Correo electrónico
+                                    </label>
+                                    <input v-model="direccion_particular.correo" type="text" id="email"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'direccion_particular' in v$"
+                                        v-for="error of v$.direccion_particular.correo.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Datos de graduado -->
+                    <div v-show="step===2" class="col-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="career" class=" form-control-label">
+                                        Graduado de <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="datos_graduado.graduado_de" type="text" id="career"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'datos_graduado' in v$"
+                                        v-for="error of v$.datos_graduado.graduado_de.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="university" class=" form-control-label">
+                                        Universidad
+                                    </label>
+                                    <input v-model="datos_graduado.nombre_universidad" type="text" id="university"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="graduate_country" class=" form-control-label">
+                                        País
+                                    </label>
+                                    <input v-model="datos_graduado.pais_universidad" type="text" id="graduate_country"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="graduate_date" class=" form-control-label">
+                                        Fecha de graduado
+                                    </label>
+                                    <input type="text" id="graduate_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="university_number" class=" form-control-label">
+                                        Número de Universidad
+                                    </label>
+                                    <input v-model="datos_graduado.numero_universidad" type="text"
+                                        id="university_number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="tomo" class=" form-control-label">
+                                        Tomo
+                                    </label>
+                                    <input v-model="datos_graduado.tomo" type="text" id="tomo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="folio" class=" form-control-label">
+                                        Folio
+                                    </label>
+                                    <input v-model="datos_graduado.folio" type="text" id="folio" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="photoTitulo" class=" form-control-label">
+                                        Foto del título
+                                        <span class="text-danger">*</span>
+                                    </label>
+
+                                    <br>
+
+                                    <button v-show="!editar_foto_titulo" class="btn btn-success"
+                                        @click="editar_foto_titulo = true">
+                                        Editar
+                                    </button>
+
+                                    <div v-show="editar_foto_titulo">
+                                        <input type="file" id="photoTitulo" class="form-control-file"
+                                            accept="image/x-png,image/gif,image/jpeg, application/pdf, application/msword"
+                                            @change="handleFotoTitulo">
+
+                                        <div v-if="error_foto_titulo" class="error">El documento no cumple los
+                                            requisitos
+                                        </div>
+
+                                        <template v-if="editar_foto_titulo">
+                                            <div class="input-errors" v-if="'datos_graduado' in v$"
+                                                v-for="error of v$.datos_graduado.foto_titulo.$errors"
+                                                :key="error.$uid">
+                                                <div class="error">[[ error.$message ]]</div>
+                                            </div>
+                                        </template>
+
+                                        <small class="form-text text-muted">
+                                            Máximo 1 fichero.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Límite de 2 MB.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Tipos permitidos: png gif jpg jpeg doc pdf.
+                                        </small>
+
+                                        <button class="btn btn-danger mt-2" @click="editar_foto_titulo = false">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Datos laborales -->
+                    <div v-show="step===3" class="col-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="work_name" class=" form-control-label">
+                                        Centro de trabajo <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="datos_laborales.centro_laboral" type="text" id="work_name"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'datos_laborales' in v$"
+                                        v-for="error of v$.datos_laborales.centro_laboral.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="job" class=" form-control-label">
+                                        Ocupación <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="datos_laborales.ocupacion" type="text" id="job"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'datos_laborales' in v$"
+                                        v-for="error of v$.datos_laborales.ocupacion.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="experience" class=" form-control-label">
+                                        Años de experiencia
+                                    </label>
+                                    <input v-model="datos_laborales.experiencia" type="number" id="experience"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'datos_laborales' in v$"
+                                        v-for="error of v$.datos_laborales.experiencia.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="work_street" class=" form-control-label">
+                                        Calle
+                                    </label>
+                                    <input v-model="datos_laborales.calle_trabajo" type="text" id="work_street"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="work_number" class=" form-control-label">
+                                        Número
+                                    </label>
+                                    <input v-model="datos_laborales.numero_trabajo" type="text" id="work_number"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="work_entre" class=" form-control-label">
+                                        Entre
+                                    </label>
+                                    <input v-model="datos_laborales.entre_trabajo" type="text" id="work_entre"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="work_state" class=" form-control-label">
+                                        Provincia / Estado
+                                    </label>
+                                    <input v-model="datos_laborales.provincia_trabajo" type="text" id="work_state"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="work_city" class=" form-control-label">
+                                        Municipio / Ciudad
+                                    </label>
+                                    <input v-model="datos_laborales.municipio_trabajo" type="text" id="work_city"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="work_phone" class=" form-control-label">
+                                        Teléfono
+                                    </label>
+                                    <input v-model="datos_laborales.telefono_trabajo" type="text" id="work_phone"
+                                        class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="forma_propiedad" class=" form-control-label">
+                                        Forma de propiedad <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="select" v-model="datos_laborales.forma_propiedad" id="forma_propiedad"
+                                        class="form-control">
+                                        <option disabled value="">Seleccione uno...</option>
+                                        <option value="Empresa del sector estatal">Empresa del sector estatal</option>
+                                        <option value="Unidad presupuestada">Unidad presupuestada</option>
+                                        <option value="Cuenta propia">Cuenta propia</option>
+                                    </select>
+
+                                    <div class="input-errors" v-if="'datos_laborales' in v$"
+                                        v-for="error of v$.datos_laborales.forma_propiedad.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="osde" class=" form-control-label">
+                                        OSDE
+                                    </label>
+                                    <input v-model="datos_laborales.osde" type="text" id="osde" class="form-control">
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="organism" class=" form-control-label">
+                                        Organismo <span class="text-danger">*</span>
+                                    </label>
+                                    <input v-model="datos_laborales.organismo" type="text" id="organism"
+                                        class="form-control">
+
+                                    <div class="input-errors" v-if="'datos_laborales' in v$"
+                                        v-for="error of v$.datos_laborales.organismo.$errors" :key="error.$uid">
+                                        <div class="error">[[ error.$message ]]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="cv" class=" form-control-label">
+                                        Currículum vitae
+                                        <span class="text-danger">*</span>
+                                    </label>
+
+                                    <br>
+
+                                    <button v-show="!editar_cv" class="btn btn-success" @click="editar_cv = true">
+                                        Editar
+                                    </button>
+
+                                    <div v-show="editar_cv">
+                                        <input type="file" id="cv" class="form-control-file"
+                                            accept="application/pdf, application/msword" @change="handleCV">
+
+                                        <div v-if="error_cv" class="error">El documento no cumple los requisitos</div>
+
+                                        <template v-if="editar_cv">
+                                            <div class="input-errors" v-if="'datos_laborales' in v$"
+                                                v-for="error of v$.datos_laborales.cv.$errors" :key="error.$uid">
+                                                <div class="error">[[ error.$message ]]</div>
+                                            </div>
+                                        </template>
+
+                                        <small class="form-text text-primary">
+                                            Añadir como anexo las evidencias correspondientes.
+                                        </small>
+                                        <small class="form-text text-muted">
+                                            Máximo 1 fichero.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Límite de 10 MB.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Tipos permitidos: doc pdf.
+                                        </small>
+
+                                        <button class="btn btn-danger mt-2" @click="editar_cv = false">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="carta_sindicato" class=" form-control-label">
+                                        Carta de la Administración y el Sindicato
+                                        <span class="text-danger">*</span>
+                                    </label>
+
+                                    <button v-show="!editar_carta_sindicato" class="btn btn-success"
+                                        @click="editar_carta_sindicato = true">
+                                        Editar
+                                    </button>
+
+                                    <div v-show="editar_carta_sindicato">
+                                        <input type="file" id="carta_sindicato" class="form-control-file"
+                                            accept="image/x-png,image/gif,image/jpeg, application/pdf, application/msword"
+                                            @change="handleCarta">
+
+                                        <div v-if="error_carta_sindicato" class="error">El documento no cumple los
+                                            requisitos</div>
+
+                                        <template v-if="editar_carta_sindicato">
+                                            <div class="input-errors" v-if="'datos_laborales' in v$"
+                                                v-for="error of v$.datos_laborales.carta_sindicato.$errors"
+                                                :key="error.$uid">
+                                                <div class="error">[[ error.$message ]]</div>
+                                            </div>
+                                        </template>
+
+                                        <small class="form-text text-muted">
+                                            Máximo 1 fichero.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Límite de 2 MB.
+                                        </small>
+
+                                        <small class="form-text text-muted">
+                                            Tipos permitidos: png gif jpg jpeg doc pdf.
+                                        </small>
+
+                                        <button class="btn btn-danger mt-2" @click="editar_carta_sindicato = false">
+                                            Cancelar
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button footer -->
+                <div class="row justify-content-end mt-5">
+                    <div class="col-12 text-right">
+                        <button v-show="step > 0" class="btn btn-dark mr-2" @click="decrementStep">Atrás</button>
+                        <button v-show="step < 3" class="btn btn-primary mr-2" @click="incrementStep">Siguiente</button>
+                        <button v-show="step === 3" class="btn btn-success mr-2" @click="validate(3)"
+                            :disabled="disabled_btn">[[ msgEnviar ]]</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/datepicker/datepicker.html'}}
+{{include '_includes/vue/import_vue.html'}}
+
+<script>
+    // URL Traer datos admisión
+    const url_get_data = "{{=URL('api_editar', args=registro.id)}}";
+    const url_redirect = "{{=URL('admision_editada')}}";
+    const registro = "{{=registro.id}}";
+</script>
+
+{{include '_vue_components/admision/editar.html'}}
+
+<script>
+    $(function () {
+        $("#graduate_date").datepicker(settings_datepicker);
+        //{{if registro.fecha_graduado:}}
+        $("#graduate_date").datepicker("setDate", '{{=registro.fecha_graduado.strftime("%d/%m/%Y")}}');
+        //{{pass}}
+    });
+</script>
+{{end page_js}}

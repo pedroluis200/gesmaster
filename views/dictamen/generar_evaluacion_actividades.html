@@ -1,0 +1,342 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    /* Font Definitions */
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        font-size: 12.0pt;
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    .MsoChpDefault {
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoPapDefault {
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <a href="{{=URL('dictamen_evaluacion_actividades')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-14.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-14 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Dictamen de evaluación para las actividades de posgrado - Modelo PG
+                    14</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2 row" style="margin: auto;max-width: 600px;">
+                    <div class=WordSection1>
+
+                        <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width=583
+                            style='width:437.6pt;margin-left:-5.4pt;border-collapse:collapse'>
+                            <tr style='height:.75in'>
+                                <td width=102 colspan=2 style='width:76.3pt;border:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:.75in'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:9.6pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><b><span lang=ES-TRAD style='font-size:
+                          16.0pt;line-height:107%'>PG-14 </span></b></p>
+                                </td>
+                                <td width=482 colspan=3 valign=bottom style='width:361.3pt;border:solid black 1.0pt;
+                          border-left:none;padding:0in 3.5pt 0in 5.4pt;height:.75in'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:1.6pt;
+                          margin-bottom:4.9pt;margin-left:0in;text-align:center;text-indent:0in;
+                          line-height:107%'><span lang=ES-TRAD>
+                        <b>
+                            {{=centro.upper()}}
+                        </b>    
+                        </span></p>
+                                    <p class=MsoNormal align=center style='margin:0in;margin-bottom:.0001pt;
+                          text-align:center;text-indent:0in;line-height:107%'><span lang=ES-TRAD>ACTA
+                                            DE EVALUACIÓN PARA LAS ACTIVIDADES DE POSGRADO </span></p>
+                                </td>
+                            </tr>
+
+                            <tr style='height:14.3pt'>
+                                <td width=470 colspan=4 valign=top style='width:352.7pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>Programa:
+                                            <b>
+                                                {{=actividad_edicion.id_edicion.id_maestria.nombre}}
+                                            </b>
+                                        </span></p>
+                                </td>
+                                <td width=113 valign=top style='width:84.9pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>Edición:
+                                            <b>
+                                                {{=actividad_edicion.id_edicion.numero}}
+                                            </b>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=583 colspan=5 valign=top style='width:437.6pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>Actividad: 
+                                    <b>
+                                        {{=actividad_edicion.id_actividad.nombre}}
+                                    </b>    
+                                    </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=583 colspan=5 valign=top style='width:437.6pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>Créditos: 
+                                     <b>
+                                        {{=actividad_edicion.creditos}}
+                                    </b>    
+                                    </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width=43 valign=top style='width:.45in;border:solid black 1.0pt;
+                          border-top:none;padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:1.45pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD>No. </span></p>
+                                </td>
+                                <td width=408 colspan=2 valign=top style='width:4.25in;border-top:none;
+                          border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:1.95pt;
+                          margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD>APELLIDOS Y NOMBRES </span></p>
+                                </td>
+                                <td width=132 colspan=2 valign=top style='width:99.2pt;border-top:none;
+                          border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:5.4pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD>EVALUACION </span></p>
+                                </td>
+                            </tr>
+
+                            {{if calificaciones:}}
+
+                            {{for index, estudiante in enumerate(calificaciones):}}
+                            <tr style='height:14.3pt'>
+                                <td width=43 valign=top style='width:.45in;border:solid black 1.0pt;
+                          border-top:none;padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=index + 1}}
+                                        </span></p>
+                                </td>
+                                <td width=408 colspan=2 valign=top style='width:4.25in;border-top:none;
+                          border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                            {{=' '.join([estudiante.apellido1, estudiante.apellido2])}}, {{=estudiante.nombre}}
+                          </span></p>
+                                </td>
+                                <td width=132 colspan=2 valign=top style='width:99.2pt;border-top:none;
+                          border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:1.15pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                            {{=get_calificacion(db, actividad_edicion.id, estudiante.id).nota}}
+                          </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+
+                            {{else:}}
+
+                            {{for i in range(25):}}
+                            <tr style='height:14.3pt'>
+                                <td width=43 valign=top style='width:.45in;border:solid black 1.0pt;
+                          border-top:none;padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>
+                                            {{=i + 1}}
+                                        </span></p>
+                                </td>
+                                <td width=408 colspan=2 valign=top style='width:4.25in;border-top:none;
+                          border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                                <td width=132 colspan=2 valign=top style='width:99.2pt;border-top:none;
+                          border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in 3.5pt 0in 5.4pt;height:14.3pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:1.15pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+
+                            {{pass}}
+
+
+
+                            <tr style='height:103.1pt'>
+                                <td width=583 colspan=5 valign=bottom style='width:437.6pt;border:solid black 1.0pt;
+                          border-top:none;padding:0in 3.5pt 0in 5.4pt;height:103.1pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>Profesor:
+                                                                                                     Coordinador:
+                                        </span></p>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span
+                                            lang=ES-TRAD>__________________________
+                                                          ______________________ </span></p>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>             </span></p>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD>Firma:
+                                                                                                          Firma:
+                                        </span></p>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:normal'><span
+                                            lang=ES-TRAD>____________________________
+                                                   ___________________________ Fecha: _________________      
+                                                      Fecha:
+                                            _________________ </span></p>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD> </span></p>
+                                </td>
+                            </tr>
+                            <tr height=0>
+                                <td width=43 style='border:none'></td>
+                                <td width=59 style='border:none'></td>
+                                <td width=349 style='border:none'></td>
+                                <td width=19 style='border:none'></td>
+                                <td width=113 style='border:none'></td>
+                            </tr>
+                        </table>
+
+                        <p class=MsoNormal><b><span lang=ES-TRAD style='font-size:9.0pt;line-height:
+                        103%'>&nbsp;</span></b></p>
+
+                        <p class=MsoNormal><b><span lang=ES-TRAD style='font-size:9.0pt;line-height:
+                        103%'>NOTA:</span></b><span lang=ES-TRAD style='font-size:9.0pt;line-height:
+                        103%'> Cuando se trate de una actividad que no forma parte de un programa de
+                                maestría, especialidad de posgrado o diplomado se omite la sección
+                                correspondiente al Coordinador</span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{block page_js}}
+
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+        /* Font Definitions */
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        font-size: 12.0pt;
+        font-family: "Arial", "sans-serif";
+        color: black;
+    }
+
+    .MsoChpDefault {
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoPapDefault {
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'dictamen_evaluacion_actividades', docStyle);
+    }
+</script>
+{{end}}
+
+{{block datatable}}
+{{end}}

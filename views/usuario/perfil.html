@@ -1,0 +1,85 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('dashboard', 'index')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-arrow-left"></i> </span>
+</a>
+
+<div class="row items-align-center">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body pb-4">
+                        <div class="text-center">
+                            <span class="display-5"><i class="fa fa-user text-primary"></i></span>
+                            <h4 class="card-widget__title text-dark mt-1">{{=usuario.username}}</h4>
+                            <p class="text-muted">{{=usuario.first_name + ' ' + usuario.last_name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="display-5"><i class="fa fa-envelope text-info"></i></span>
+                        <h5>Correo</h5>
+                        <h6 class="">{{=usuario.email}}</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="display-5"><i class="fa fa-users text-info"></i></span>
+                        <h5>Rol</h5>
+                        <h6 class="">{{=rol}}</h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Cambiar contraseña</h4>
+        
+                        <div class="mt-4">
+                            {{=form.custom.begin}}
+        
+                            <div class="row">
+                                <div class="col-sm-12 mb-3">
+                                    {{=form.custom.label.password}} <span class="error">*</span>
+                                    <div class="mb-2">{{=form.custom.widget.password}}</div>
+                                    {{if form.errors.password:}}
+                                        <p class="text-danger">{{=form.errors.password}}</p>
+                                    {{pass}}
+                                </div>
+                                <div class="col-sm-12">
+                                    {{=form.custom.label.repeat}} <span class="error">*</span>
+                                    <div class="mb-2">{{=form.custom.widget.repeat}}</div>
+                                    {{if form.errors.repeat:}}
+                                        <p class="text-danger">{{=form.errors.repeat}}</p>
+                                    {{pass}}
+                                </div>
+                            </div>
+        
+                            <br>
+                            {{=form.custom.submit}}
+                            {{=form.custom.end}}
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

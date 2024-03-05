@@ -1,0 +1,165 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    .info h5 {
+        margin-bottom: 10px;
+        font-weight: normal !important;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    {{if auth.has_membership('Coordinador'):}}
+    <div class="col-md-8">
+        <a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-bars"></i> </span>
+        </a>
+
+        <a href="{{=URL('editar', args=admision.id)}}" class="btn btn-success btn-rounded text-white mb-3">
+            <i class="fas fa-edit"></i>
+        </a>
+
+        <a href="{{=URL('reporte_admision', args=admision.id)}}" class="btn btn-dark btn-rounded text-white mb-3">
+            <i class="fas fa-print"></i>
+        </a>
+
+        <a href="#" onclick="delete_elem(`{{=URL('eliminar', args=admision.id)}}`)"
+            class="btn btn-danger btn-rounded text-white mb-3">
+            <i class="fas fa-trash"></i>
+        </a>
+    </div>
+    {{pass}}
+    <div class="{{= 'col-md-4' if auth.has_membership('Coordinador') else 'col-md-12'}} text-right mb-3">
+        {{if admision.estado == 'Aprobado':}}
+        {{badge='primary'}}
+        {{elif admision.estado == 'No aprobado':}}
+        {{badge='danger'}}
+        {{else:}}
+        {{badge='warning'}}
+        {{pass}}
+
+        <h3>
+            <span class="badge badge-{{=badge}}">{{=admision.estado}}</span>
+        </h3>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Información personal</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block info">
+                    <h5><strong>Nombre: </strong>{{=admision.nombre}}</h5>
+                    <h5><strong>Apellidos: </strong>{{=admision.apellido1 + ' ' + admision.apellido2}}</h5>
+                    <h5><strong>Usuario: </strong>
+                        <a href="{{=URL('usuario', 'detalles', args=admision.id_user)}}">
+                            {{=admision.id_user.username}}
+                        </a>
+                    </h5>
+                    <h5><strong>Carnet: </strong>{{=admision.ci or 'No definido'}}</h5>
+                    <h5><strong>Pasaporte: </strong>{{=admision.pasaporte}}</h5>
+                    <h5><strong>Teléfono: </strong>{{=admision.telefono or 'No definido'}}</h5>
+                    <h5><strong>País: </strong>{{=admision.pais}}</h5>
+                    <h5><strong>Sexo: </strong>{{=admision.sexo or 'No definido'}}</h5>
+                    <h5><strong>Foto carnet cara 1: </strong>
+                        <a href="{{=URL('default', 'download', args=admision.foto_ci_1)}}" target="_blank">
+                            Descargar foto
+                        </a>
+                    </h5>
+                    <h5><strong>Foto carnet cara 2: </strong>
+                        <a href="{{=URL('default', 'download', args=admision.foto_ci_2)}}" target="_blank">
+                            Descargar foto
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Dirección particular</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block info">
+                    <h5><strong>Calle: </strong>{{=admision.calle or 'No definido'}}</h5>
+                    <h5><strong>Apartamento: </strong>{{=admision.calle or 'No definido'}}</h5>
+                    <h5><strong>Número residencia: </strong>{{=admision.numero_residencia or 'No definido'}}</h5>
+                    <h5><strong>Entre: </strong>{{=admision.entre_direccion or 'No definido'}}</h5>
+                    <h5><strong>Provincia/Estado: </strong>{{=admision.provincia_residencia}}</h5>
+                    <h5><strong>Municipio/Ciudad: </strong>{{=admision.municipio_residencia}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Datos de graduado</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block info">
+                    <h5><strong>Graduado de: </strong>{{=admision.graduado_de}}</h5>
+                    <h5><strong>Universidad: </strong>{{=admision.nombre_universidad or 'No definido'}}</h5>
+                    <h5><strong>País: </strong>{{=admision.pais_universidad or 'No definido'}}</h5>
+                    <h5>
+                        <strong>Fecha de graduado: </strong>
+                        {{=admision.fecha_graduado.strftime('%d/%m/%Y') if admision.fecha_graduado else 'No definido'}}
+                    </h5>
+                    <h5><strong>Número de Universidad: </strong>{{=admision.numero_universidad or 'No definido'}}</h5>
+                    <h5><strong>Tomo: </strong>{{=admision.tomo or 'No definido'}}</h5>
+                    <h5><strong>Folio: </strong>{{=admision.folio or 'No definido'}}</h5>
+                    <h5><strong>Foto título: </strong>
+                        <a href="{{=URL('default', 'download', args=admision.foto_titulo)}}" target="_blank">
+                            Descargar foto
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Datos laborales</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block info">
+                    <h5><strong>Centro laboral: </strong>{{=admision.centro_laboral}}</h5>
+                    <h5><strong>Ocupación: </strong>{{=admision.ocupacion}}</h5>
+                    <h5><strong>Años de experiencia: </strong>{{=admision.experiencia}}</h5>
+                    <h5><strong>Teléfono laboral: </strong>{{=admision.telefono_trabajo or 'No definido'}}</h5>
+                    <h5><strong>Calle: </strong>{{=admision.calle_trabajo or 'No definido'}}</h5>
+                    <h5><strong>Número: </strong>{{=admision.numero_trabajo or 'No definido'}}</h5>
+                    <h5><strong>Entre: </strong>{{=admision.entre_trabajo or 'No definido'}}</h5>
+                    <h5><strong>Provincia/Estado: </strong>{{=admision.provincia_trabajo or 'No definido'}}</h5>
+                    <h5><strong>Municipio/Ciudad: </strong>{{=admision.municipio_trabajo or 'No definido'}}</h5>
+                    <h5><strong>Forma de propiedad: </strong>{{=admision.forma_propiedad}}</h5>
+                    <h5><strong>OSDE: </strong>{{=admision.osde or 'No definido'}}</h5>
+                    <h5><strong>Organismo: </strong>{{=admision.organismo}}</h5>
+                    <h5><strong>Currículum vitae: </strong>
+                        <a href="{{=URL('default', 'download', args=admision.cv)}}" target="_blank">
+                            Descargar
+                        </a>
+                    </h5>
+                    <h5><strong>Carta de Administración y Sindicato: </strong>
+                        <a href="{{=URL('default', 'download', args=admision.carta_sindicato)}}" target="_blank">
+                            Descargar
+                        </a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{block page_js}}
+{{include '_includes/sweetalert/delete.html'}}
+
+{{end page_js}}

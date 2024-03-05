@@ -1,0 +1,887 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    @font-face {
+        font-family: Wingdings;
+        panose-1: 5 0 0 0 0 0 0 0 0 0;
+        mso-font-charset: 2;
+        mso-generic-font-family: auto;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 268435456 0 0 -2147483648 0;
+    }
+
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 1;
+        mso-generic-font-family: roman;
+        mso-font-format: other;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 0 0 0 0 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    span.SpellE {
+        mso-style-name: "";
+        mso-spl-e: yes;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+        mso-header-margin: .5in;
+        mso-footer-margin: .5in;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        {{if auth.has_membership('Coordinador'):}}
+        <a onclick="history.back()" href="#" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>        
+        {{pass}}
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-01.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-01 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Solicitud de matrícula - Modelo PG 01</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2" style="margin: auto;width: min-content;">
+                    <p>
+                        <strong>PG-01 Planilla de Solicitud de Matrícula</strong>
+                    </p>
+                    <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width=619 style='width:464.15pt;margin-left:-5.4pt;border-collapse:collapse;mso-yfti-tbllook:
+                    1184;mso-padding-alt:0in 0in 0in 5.3pt'>
+                        <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:22.1pt'>
+                            <td width=299 colspan=5 valign=top style='width:224.25pt;border:solid black 1.0pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:22.1pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:5.35pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                            {{=centro}}
+                                        </span></b><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'> </span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=194 colspan=4 valign=top style='width:145.8pt;border:solid black 1.0pt;
+                     border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:22.1pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:5.25pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>MATRÍCULA </span></b><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=125 rowspan=3 style='width:94.1pt;border:solid black 1.0pt;
+                     border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:22.1pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:5.3pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        FOTO
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:1;height:22.7pt'>
+                            <td width=493 colspan=9 valign=top style='width:370.05pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:22.7pt'>
+                                <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                     text-align:left;text-indent:0in;line-height:107%;tab-stops:center 125.3pt'><span lang=ES-TRAD
+                                        style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:
+                     107%;mso-ansi-language:ES-TRAD'>Facultad u otra área autorizada</span><b
+                                        style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'><span style='mso-tab-count:1'>     </span></span></b><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:2;height:37.9pt'>
+                            <td width=493 colspan=9 valign=top style='width:370.05pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:37.9pt'>
+                                <p class=MsoNormal style='margin-top:0in;margin-right:7.6pt;margin-bottom:
+                     .1pt;margin-left:.1pt;text-indent:0in;line-height:99%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:99%;mso-ansi-language:
+                     ES-TRAD'><span style='mso-spacerun:yes'>      </span>Maestría (<b>x</b>)<span
+                                            style='mso-spacerun:yes'>          
+                                        </span>Especialidad de Posgrado (<span style='mso-spacerun:yes'>  
+                                        </span>)<span style='mso-spacerun:yes'>                 </span>
+                                        Posdoctorado
+                                        (<span style='mso-spacerun:yes'>   </span>)<span
+                                            style='mso-spacerun:yes'>            </span> <br>
+                                        Curso ( )<span style='mso-spacerun:yes'>                             
+                                        </span>Entrenamiento
+                                        (<span style='mso-spacerun:yes'>   </span>)<span
+                                            style='mso-spacerun:yes'>                     </span>Diplomado (<span
+                                            style='mso-spacerun:yes'>    </span>) </span><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                            style='mso-spacerun:yes'>      </span>Modalidad:<span
+                                            style='mso-spacerun:yes'>      </span>Tiempo completo (<span
+                                            style='mso-spacerun:yes'>   </span>)<span style='mso-spacerun:yes'>    
+                                        </span>Tiempo Parcial (<span style='mso-spacerun:yes'>   </span>)<span
+                                            style='mso-spacerun:yes'>     </span>A distanacia (<span
+                                            style='mso-spacerun:yes'>    </span>)<span style='mso-spacerun:yes'> 
+                                        </span></span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:3;height:20.75pt'>
+                            <td width=448 colspan=8 valign=top style='width:336.05pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:20.75pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Nombre
+                                        del Programa: </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=171 colspan=2 valign=top style='width:128.1pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:20.75pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        Edición: {{=B(admision.id_edicion.numero)}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:4;height:21.1pt'>
+                            <td width=619 colspan=10 valign=top style='width:464.15pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:21.1pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Mención:
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:5;height:21.5pt'>
+                            <td width=209 colspan=4 valign=top style='width:157.05pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:21.5pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        Nombre (s) {{=B(admision.nombre)}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+
+                                    </span></p>
+                            </td>
+                            <td width=188 colspan=3 valign=top style='width:141.05pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:21.5pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        1er Apellido {{=B(admision.apellido1)}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=221 colspan=3 valign=top style='width:166.05pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:21.5pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:1.85pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:10.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        2do Apellido {{=B(admision.apellido2)}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:6;height:27.35pt'>
+                            <td width=173 colspan=3 valign=top style='width:129.9pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:27.35pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        No. Carné de identidad <br>
+                                        {{=B(admision.ci)}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=132 colspan=3 valign=top style='width:99.1pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:27.35pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        No. Pasaporte <br>
+                                        {{=B(admision.pasaporte)}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=143 colspan=2 valign=top style='width:107.05pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:27.35pt'>
+                                <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                     text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:
+                     ES-TRAD'>
+                                        Nacionalidad <br>
+                                        {{=B(admision.pais)}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=171 colspan=2 valign=top style='width:128.1pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:27.35pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:1.55pt;margin-left:.1pt;text-align:left;text-indent:0in;
+                     line-height:107%'>
+                                    <span lang=ES-TRAD style='font-size:10.0pt;mso-bidi-font-size:
+                     11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        Sexo:
+                                    </span>
+                                    <span lang=ES-TRAD style='font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:
+                     107%;font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+                     Wingdings;mso-ansi-language:ES-TRAD'>{{= 'x' if admision.sexo == 'Femenino' else "¨"}}</span>
+
+                                    <span lang=ES-TRAD style='font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+                     mso-ansi-language:ES-TRAD'> Femenino </span>
+
+                                    <span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span>
+                                </p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'>
+                                    <span lang=ES-TRAD style='font-size:10.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                            style='mso-spacerun:yes'>           </span>
+                                    </span><span lang=ES-TRAD style='font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+                     font-family:Wingdings;mso-fareast-font-family:Wingdings;mso-bidi-font-family:
+                     Wingdings;mso-ansi-language:ES-TRAD'>{{= 'x' if admision.sexo == 'Masculino' else "¨"}}</span>
+
+                                    <span lang=ES-TRAD style='font-size:10.0pt;mso-bidi-font-size:11.0pt;line-height:107%;
+                     mso-ansi-language:ES-TRAD'>
+                                        Masculino
+                                    </span>
+                                    <span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:7;height:85.3pt'>
+                            <td width=619 colspan=10 valign=top style='width:464.15pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:85.3pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:5.5pt;margin-left:.1pt;text-align:left;text-indent:0in;
+                     line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:
+                     ES-TRAD'>Datos del domicilio:</span></b><span lang=ES-TRAD style='font-size:
+                     9.0pt;mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'> </span><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:5.15pt;margin-left:.1pt;text-align:left;text-indent:0in;
+                     line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:
+                     11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        Calle:
+                                        <strong>
+                                            {{= admision.calle or "__________________________________________"}}
+                                        </strong>
+                                        &nbsp;&nbsp;No:
+                                        <strong>
+                                            {{= admision.numero_residencia or "_________"}}
+                                        </strong>
+                                        &nbsp;&nbsp;Apto
+                                        <strong>
+                                            {{= admision.apto or "_________"}}
+                                        </strong>
+                                        &nbsp;&nbsp;entre
+                                        {{if admision.entre_direccion:}}
+                                        {{= B(admision.entre_direccion)}}
+                                        {{else:}}
+                                        ______________________________ y __________________________________
+                                        {{pass}}
+                                        <o:p>
+                                        </o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:157%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:157%;mso-ansi-language:ES-TRAD'><span
+                                            style='mso-spacerun:yes'> </span>
+                                        Municipio:
+                                        {{= B(admision.municipio_residencia) or "________________________"}}
+                                        <span style='mso-spacerun:yes'>       
+                                        </span>
+                                        Provincia
+                                        {{= B(admision.provincia_residencia) or "________________________"}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.15pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        <br>
+                                        Teléfono
+                                        <strong>
+                                            {{= admision.telefono or "____________________"}}
+                                        </strong>
+                                        &nbsp;&nbsp;Correo<span style='mso-spacerun:yes'> 
+                                        </span>
+                                        <strong>
+                                            {{= admision.correo or "_________________________"}}
+                                        </strong>
+                                        <span style='mso-spacerun:yes'>   
+                                        </span></span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:8;height:81.35pt'>
+                            <td width=619 colspan=10 valign=top style='width:464.15pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:81.35pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:2.4pt;margin-left:.1pt;text-align:left;text-indent:0in;
+                     line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:
+                     ES-TRAD'>Datos del título de graduado universitario o de Doctor en caso de
+                                            solicitud de un posdoctorado: </span></b><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:2.15pt;margin-left:.1pt;text-align:left;text-indent:0in;
+                     line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:
+                     11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        Título:
+                                        {{if admision.graduado_de:}}
+                                        {{= B(admision.graduado_de)}}
+                                        {{else:}}
+                                        ____________________________________________________________________________
+                                        {{pass}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:20.05pt;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        Institución
+                                        que otorgó el título:
+                                        {{if admision.nombre_universidad:}}
+                                        {{= B(admision.nombre_universidad)}}
+                                        {{else:}}
+                                        __________________________________________________________
+                                        {{pass}}
+                                        <br>
+                                        <br>
+                                        Fecha:
+                                        {{= B(admision.fecha_graduado.strftime('%d/%m/%Y')) if admision.fecha_graduado
+                                        else
+                                        "___________________"}}
+
+                                        <span style='mso-spacerun:yes'>    </span>
+                                        Tomo:
+                                        <strong>
+                                            {{= admision.tomo or "_________"}}
+                                        </strong>
+                                        <span style='mso-spacerun:yes'>   </span>
+                                        Folio:
+                                        <strong>
+                                            {{= admision.folio or "_________"}}
+                                        </strong>
+                                        <span style='mso-spacerun:yes'>  </span>
+                                        Número:
+                                        <strong>
+                                            {{= admision.numero_universidad or "_________"}}
+                                        </strong>
+                                        País:
+                                        <strong>
+                                            {{= admision.pais_universidad or "____________________________"}}
+                                        </strong>
+                                    </span>
+                                    <span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:9;height:2.2in'>
+                            <td width=619 colspan=10 valign=top style='width:464.15pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:2.2in'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:2.4pt;margin-left:.1pt;text-align:left;text-indent:0in;
+                     line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:
+                     ES-TRAD'>Datos laborales: </span></b><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                     margin-left:.1pt;margin-bottom:.0001pt;text-indent:0in;line-height:128%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:
+                     128%;mso-ansi-language:ES-TRAD'>
+                                        Ocupación:
+                                        <span style='mso-spacerun:yes'> 
+                                        </span>
+                                        {{if admision.ocupacion:}}
+                                        {{= B(admision.ocupacion)}}
+                                        {{else:}}
+                                        _______________________________________________________________________
+                                        {{pass}}
+
+                                        <span style='mso-spacerun:yes'>  </span>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                     margin-left:.1pt;margin-bottom:.0001pt;text-indent:0in;line-height:128%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:
+                     128%;mso-ansi-language:ES-TRAD'>
+                                        Años de experiencia en dicha ocupación:
+                                        <span style='mso-spacerun:yes'> 
+                                        </span>
+                                        {{= B(admision.experiencia) or "__________"}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:5.25pt;margin-left:.15pt;text-align:left;text-indent:0in;
+                     line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:
+                     11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        Centro de Trabajo:
+                                        {{if admision.centro_laboral:}}
+                                        {{= B(admision.centro_laboral)}}
+                                        {{else:}}
+                                        ___________________________________________________________________
+                                        {{pass}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:5.15pt;margin-left:.15pt;text-align:left;text-indent:0in;
+                     line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:
+                     11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Forma de propiedad:<span
+                                            style='mso-spacerun:yes'>   </span>
+                                        Empresa del sector estatal
+                                        (<span style='mso-spacerun:yes'>
+                                            {{if admision.forma_propiedad == 'Empresa del sector estatal':}}
+                                            {{=B('x')}}
+                                            {{else:}}
+                                              
+                                            {{pass}}
+                                        </span>)<span style='mso-spacerun:yes'>   
+                                        </span>Unidad presupuestada (
+                                        <span style='mso-spacerun:yes'>
+                                            {{if admision.forma_propiedad == 'Unidad presupuestada':}}
+                                            {{=B('x')}}
+                                            {{else:}}
+                                              
+                                            {{pass}}
+                                        </span>)<span style='mso-spacerun:yes'>     </span></span><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:.5pt;
+                     margin-bottom:0in;margin-left:.15pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:157%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:157%;mso-ansi-language:ES-TRAD'>Otra,
+                                        ¿cuál?
+                                        {{if admision.forma_propiedad == 'Cuenta propia':}}
+                                        Cuenta propia
+                                        {{else:}}
+                                        ___________________________________________________________________
+                                        {{pass}}
+                                        <o:p>
+                                        </o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:.5pt;
+                     margin-bottom:0in;margin-left:.15pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:157%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:157%;mso-ansi-language:ES-TRAD'>Dirección:
+                                        Calle:
+                                        {{if admision.calle_trabajo:}}
+                                        {{=admision.calle_trabajo}}
+                                        {{else:}}
+                                        ___________________________________________________________________
+                                        {{pass}}
+                                        <span style='mso-spacerun:yes'>    </span>
+                                        No:
+                                        {{= B(admision.numero_trabajo) or "_______"}}
+                                        <span style='mso-spacerun:yes'> 
+                                        </span>
+                                        entre:
+                                        {{if admision.entre_trabajo:}}
+                                        {{=admision.entre_trabajo}}
+                                        {{else:}}
+                                        <span style='mso-spacerun:yes'> 
+                                        </span>y<span style='mso-spacerun:yes'> 
+                                        </span>
+                                        _________________________________________
+
+                                        {{pass}}
+
+                                        <span style='mso-spacerun:yes'>     </span>
+                                        Municipio:
+                                        {{= B(admision.municipio_trabajo) or "____________________"}}
+
+                                        <span style='mso-spacerun:yes'>  </span>
+                                        Provincia:
+                                        {{= B(admision.provincia_trabajo) or "____________________"}}
+                                        <span style='mso-spacerun:yes'>  </span>
+                                        Teléfono:
+                                        {{= B(admision.telefono_trabajo) or "____________________"}}
+                                        <span style='mso-spacerun:yes'>    </span></span><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.15pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        OSDE:
+                                        {{= B(admision.osde) or "______________________________"}}
+                                        <span style='mso-spacerun:yes'>     
+                                        </span>
+                                        Organismo:
+                                        {{= B(admision.osde) or "____________________"}}
+                                    </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:10;height:53.15pt'>
+                            <td width=619 colspan=10 valign=top style='width:464.15pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:53.15pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:152%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:
+                     152%;mso-ansi-language:ES-TRAD'>Funcionario de la entidad que autoriza la
+                                            solicitud de matrícula (firmar y poner cuño de la entidad): </span></b><span
+                                        lang=ES-TRAD style='font-size:9.0pt;mso-bidi-font-size:11.0pt;line-height:
+                     152%;mso-ansi-language:ES-TRAD'>
+
+                                        <br>Nombres y Apellidos:
+                                        ______________________________________________<span
+                                            style='mso-spacerun:yes'>       </span></span><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                     margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Cargo:
+                                        ___________________________________<span
+                                            style='mso-spacerun:yes'>                                   </span>Firma:
+                                        ___________________<span style='mso-spacerun:yes'>      </span></span><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:11;height:11.4pt'>
+                            <td width=209 colspan=4 valign=top style='width:157.05pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:11.4pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:5.2pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Fecha
+                                        de solicitud </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=188 colspan=3 valign=top style='width:141.05pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:11.4pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:6.95pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Firma
+                                        del Solicitante </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=221 colspan=3 valign=top style='width:166.05pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:11.4pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:6.95pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Firma
+                                        del Secretario Docente </span><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+                        <tr style='mso-yfti-irow:12;mso-yfti-lastrow:yes;height:11.3pt'>
+                            <td width=70 valign=top style='width:52.3pt;border:solid black 1.0pt;
+                     border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                     padding:0in 0in 0in 5.3pt;height:11.3pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:5.45pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Día </span><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=70 valign=top style='width:52.45pt;border-top:none;border-left:
+                     none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:11.3pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:5.6pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Mes </span><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=70 colspan=2 valign=top style='width:52.3pt;border-top:none;
+                     border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:11.3pt'>
+                                <p class=MsoNormal align=left style='margin-top:0in;margin-right:5.3pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:left;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Año </span><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=188 colspan=3 style='width:141.05pt;border-top:none;border-left:
+                     none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:11.3pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:4.65pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                            style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                            <td width=221 colspan=3 style='width:166.05pt;border-top:none;border-left:
+                     none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                     mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                     mso-border-alt:solid black .5pt;padding:0in 0in 0in 5.3pt;height:11.3pt'>
+                                <p class=MsoNormal align=center style='margin-top:0in;margin-right:4.65pt;
+                     margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                     text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:9.0pt;
+                     mso-bidi-font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                            style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                     ES-TRAD'>
+                                        <o:p></o:p>
+                                    </span></p>
+                            </td>
+                        </tr>
+
+                        <![if !supportMisalignedColumns]>
+                        <tr height=0>
+                            <td width=70 style='border:none'></td>
+                            <td width=70 style='border:none'></td>
+                            <td width=34 style='border:none'></td>
+                            <td width=36 style='border:none'></td>
+                            <td width=90 style='border:none'></td>
+                            <td width=6 style='border:none'></td>
+                            <td width=92 style='border:none'></td>
+                            <td width=51 style='border:none'></td>
+                            <td width=45 style='border:none'></td>
+                            <td width=125 style='border:none'></td>
+                        </tr>
+                        <![endif]>
+                    </table>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+        @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:1;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:0 0 0 0 0 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:5.65pt;
+	margin-left:.5pt;
+	text-align:justify;
+	text-indent:-.5pt;
+	line-height:103%;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:11.0pt;
+	font-family:"Arial","sans-serif";
+	mso-fareast-font-family:Arial;
+	color:black;
+	mso-ansi-language:EN-US;
+	mso-fareast-language:EN-US;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-family:"Calibri","sans-serif";
+	mso-ascii-font-family:Calibri;
+	mso-ascii-theme-font:minor-latin;
+	mso-fareast-font-family:Calibri;
+	mso-fareast-theme-font:minor-latin;
+	mso-hansi-font-family:Calibri;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;
+	mso-fareast-language:EN-US;}
+.MsoPapDefault
+	{mso-style-type:export-only;
+	margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:70.85pt 85.05pt 70.85pt 85.05pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.WordSection1
+	{page:WordSection1;}
+
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'solicitud_matricula', docStyle);
+    }
+</script>
+{{end page_js}}

@@ -1,0 +1,62 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-primary">
+    <span><i class="fa fa-arrow-left"></i> </span>
+</a>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gestionar actividades de esta edición</h4>
+                <h5>
+                    Profesor: {{=' '.join([profesor.first_name, profesor.last_name])}}
+                </h5>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Créditos</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for actividad in actividades:}}
+                            <tr>
+                                <td>{{=actividad.id_actividad.nombre}}</td>
+                                <td>{{=actividad.id_actividad.tipo}}</td>
+                                <td>{{=actividad.creditos}}</td>
+                                <td>{{=actividad.fecha_inicio}}</td>
+                                <td>{{=actividad.fecha_fin}}</td>
+                                <td>
+                                    <a href="#"
+                                        onclick="delete_elem(`{{=URL('eliminar_actividad', args=actividad.id_actividad, vars=dict(profesor=profesor.id))}}`)"
+                                        class="btn btn-danger btn-rounded text-white mb-2">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Créditos</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

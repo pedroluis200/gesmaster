@@ -1,0 +1,103 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    .info h5 {
+        margin-bottom: 10px;
+        font-weight: normal !important;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-md-8">
+        <a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>
+
+        <a href="{{=URL('editar', args=edicion.id)}}" class="btn btn-success btn-rounded text-white mb-3">
+            <i class="fas fa-edit"></i>
+        </a>
+
+        {{if not edicion.esta_llena:}}
+
+        {{if edicion.matricula_abierta:}}
+        <a href="{{=URL('cambiar_matricula', args=edicion.id)}}" class="btn btn-danger btn-rounded text-white mb-3 ml-2">
+            <span><i class="fa fa-times-circle pr-1"></i> </span>
+            Cerrar matrícula
+        </a>
+        {{else:}}
+        <a href="{{=URL('cambiar_matricula', args=edicion.id)}}" class="btn btn-success btn-rounded text-white mb-3 ml-2">
+            <span><i class="fa fa-check-circle pr-1"></i> </span>
+            Abrir matrícula
+        </a>
+        {{pass}}
+        
+        {{pass}}
+
+        {{if edicion.activa:}}
+        <a href="{{=URL('archivar_edicion', args=edicion.id)}}" class="btn btn-secondary btn-rounded text-white mb-3 ml-2">
+            <span><i class="fa fa-archive pr-1"></i> </span>
+            Archivar
+        </a>
+        {{else:}}
+        <a href="{{=URL('activar_edicion', args=edicion.id)}}" class="btn btn-success btn-rounded text-white mb-3 ml-2">
+            <span><i class="fa fa-star pr-1"></i> </span>
+            Activar
+        </a>
+        {{pass}}
+    </div>
+    <div class="col-md-4 text-right mb-3">
+        <h4>
+            {{if edicion.activa:}}
+            <span class="badge badge-primary">
+                Edición Activa
+            </span>
+            {{else:}}
+            <span class="badge badge-dark">
+                Edición Archivada
+            </span>
+            {{pass}}
+
+            {{if edicion.esta_llena:}}
+            <span class="badge badge-success">
+                Matrícula llena
+            </span>
+            {{elif edicion.matricula_abierta:}}
+            <span class="badge badge-success">
+                Matrícula abierta
+            </span>
+            {{else:}}
+            <span class="badge badge-secondary">
+                Matrícula cerrada
+            </span>
+            {{pass}}
+        </h4>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Detalles edición</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block info">
+                    <h5><strong>Número: </strong>{{=edicion.numero}}</h5>
+                    <h5><strong>Límite de matrícula: </strong>{{=edicion.limite_matricula}}</h5>
+                    <h5><strong>Créditos Mínimos: </strong>{{=edicion.creditos_minimos}}</h5>
+                    <h5><strong>Fecha Inicio: </strong>{{=edicion.fecha_inicio.strftime('%d/%m/%Y')}}</h5>
+                    <h5><strong>Fecha Fin: </strong>{{=edicion.fecha_fin.strftime('%d/%m/%Y')}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{block page_js}}
+{{include '_includes/sweetalert/delete.html'}}
+
+{{end page_js}}

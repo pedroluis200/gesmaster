@@ -1,0 +1,30 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-arrow-left"></i> </span>
+</a>
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Modificar</strong> solicitud
+            </div>
+            <div class="card-body card-block">
+                {{=form.custom.begin}}
+                <div class="col-md-12">
+                    {{=form.custom.label.estado}}
+                    <span class="error">*</span>
+                </div>
+                <div class="col-md-6">
+                    {{=form.custom.widget.estado}}
+                </div>
+               
+                <div class="col-md-12 mt-4">
+                    {{=form.custom.submit}}
+                </div>
+                {{=form.custom.end}}
+            </div>
+        </div>
+    </div>
+</div>

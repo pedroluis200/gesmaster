@@ -1,0 +1,926 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    /* Font Definitions */
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 0;
+        mso-generic-font-family: roman;
+        mso-font-pitch: variable;
+        mso-font-signature: -536869121 1107305727 33554432 0 415 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    h1 {
+        mso-style-priority: 9;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        mso-style-link: "Título 1 Car";
+        mso-style-next: Normal;
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 0in;
+        margin-left: .5pt;
+        margin-bottom: .0001pt;
+        text-indent: -.5pt;
+        line-height: 107%;
+        mso-pagination: widow-orphan lines-together;
+        page-break-after: avoid;
+        mso-outline-level: 1;
+        font-size: 16.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-font-kerning: 0pt;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.Ttulo1Car {
+        mso-style-name: "Título 1 Car";
+        mso-style-priority: 9;
+        mso-style-unhide: no;
+        mso-style-locked: yes;
+        mso-style-link: "Título 1";
+        mso-ansi-font-size: 16.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-ascii-font-family: Arial;
+        mso-fareast-font-family: Arial;
+        mso-hansi-font-family: Arial;
+        mso-bidi-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        font-weight: bold;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.SpellE {
+        mso-style-name: "";
+        mso-spl-e: yes;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 11.0in 8.5in;
+        mso-page-orientation: landscape;
+        margin: .75in 70.85pt 49.5pt 70.85pt;
+        mso-header-margin: .5in;
+        mso-footer-margin: .5in;
+        mso-even-header: url("PG-13_archivos/header.htm") eh1;
+        mso-header: url("PG-13_archivos/header.htm") h1;
+        mso-first-header: url("PG-13_archivos/header.htm") fh1;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    table.TableGrid {
+        mso-style-name: TableGrid;
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-unhide: no;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 0in 0in 0in;
+        mso-para-margin: 0in;
+        mso-para-margin-bottom: .0001pt;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-13.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-13 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Calendario oficial de la edición - Modelo PG 13</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2" style="margin: auto;padding-left: 10px;">
+                    <div class=WordSection1>
+
+                        <h1><span lang=ES-TRAD style='font-family:"Times New Roman","serif";mso-fareast-font-family:
+                        "Times New Roman";mso-ansi-language:ES-TRAD'>PG-13 </span><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></h1>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>CENTRO:
+                                <b>{{=centro.upper()}}</b>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>FACULTAD
+                                ______________________________________ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>MAESTRÍA
+                                O ESPECIALIDAD:
+                                <b>{{=maestria_nombre.upper()}}</b>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:3.25pt;
+                        margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:left;
+                        text-indent:184.8pt;line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>CALENDARIO OFICIAL DE LA EDICIÓN<o:p></o:p>
+                                </span></b></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:3.25pt;
+                        margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:left;
+                        text-indent:184.8pt;line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>
+                                    <o:p>&nbsp;</o:p>
+                                </span></b></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.25pt;margin-bottom:
+                        0in;margin-left:.5pt;margin-bottom:.0001pt;line-height:107%'><b
+                                style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='mso-ansi-language:
+                        ES-TRAD'>Fecha de Inicio:
+                                    {{=edicion_actual.id_edicion.fecha_inicio.strftime('%d/%m/%Y')}}
+                                </span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                    style='mso-spacerun:yes'> </span><b style='mso-bidi-font-weight:normal'>Parte
+                                    Académica: </b>_____________<o:p></o:p>
+                            </span></p>
+
+                        <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width=866 style='width:649.8pt;margin-left:-5.4pt;border-collapse:collapse;mso-yfti-tbllook:
+                         1184;mso-padding-alt:0in 5.7pt 0in 5.4pt'>
+                            <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.2pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:3.25pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span class=SpellE><span lang=ES-TRAD
+                                                style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Nro</span></span><span
+                                            lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=321 valign=top style='width:241.1pt;border:solid black 1.0pt;
+                          border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.4pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Título del Curso/Entrenamiento </span><span
+                                            lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=274 valign=top style='width:205.45pt;border:solid black 1.0pt;
+                          border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.35pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Profesor </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=113 valign=top style='width:85.1pt;border:solid black 1.0pt;
+                          border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.55pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Fecha Inicio </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=111 valign=top style='width:83.05pt;border:solid black 1.0pt;
+                          border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.2pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Fecha Final </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            {{if actividades:}}
+
+                            {{for i, act in enumerate(actividades):}}
+                            <tr style='mso-yfti-irow:{{=i + 1}};height:13.1pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.3pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>
+                                            {{=i + 1}}
+                                        </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=321 valign=top style='width:241.1pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'>
+                                                {{=act.id_actividad.nombre}}
+                                            </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=274 valign=top style='width:205.45pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'>
+                                                {{=' '.join([act.id_profesor.first_name, act.id_profesor.last_name])}}
+                                            </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=113 valign=top style='width:85.1pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'>
+                                                {{=act.fecha_inicio.strftime('%d/%m/%Y')}}
+                                            </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=111 valign=top style='width:83.05pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'>
+                                                {{=act.fecha_fin.strftime('%d/%m/%Y')}}
+                                            </span><span style='mso-spacerun:yes'>    
+                                            </span><span
+                                                style='mso-spacerun:yes'>                     </span></span><span
+                                            lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+
+                            {{else:}}
+
+                            {{for i in range(10):}}
+                            <tr style='mso-yfti-irow:{{=i + 1}};height:13.1pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.3pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>
+                                            {{=i + 1}}
+                                        </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=321 valign=top style='width:241.1pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=274 valign=top style='width:205.45pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=113 valign=top style='width:85.1pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=111 valign=top style='width:83.05pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span><span style='mso-spacerun:yes'>    
+                                            </span><span
+                                                style='mso-spacerun:yes'>                     </span></span><span
+                                            lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+
+                            {{pass}}
+                        </table>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:465.5pt;
+                        margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:left;
+                        text-indent:0in;line-height:143%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'>   
+                                    </span></span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:.15pt;
+                        margin-left:.85pt;line-height:109%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>Parte Investigativa: </span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width=866 style='width:649.8pt;margin-left:-5.4pt;border-collapse:collapse;mso-yfti-tbllook:
+                         1184;mso-padding-alt:0in 5.7pt 0in 5.4pt'>
+                            <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.1pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:3.25pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span class=SpellE><span lang=ES-TRAD
+                                                style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>Nro</span></span><span
+                                            lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'>
+                                        </span><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=406 valign=top style='width:304.8pt;border:solid black 1.0pt;
+                          border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.4pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Actividad </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=208 valign=top style='width:156.0pt;border:solid black 1.0pt;
+                          border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.3pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Fechas Previstas </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=205 valign=top style='width:153.85pt;border:solid black 1.0pt;
+                          border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.4pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Fechas Adicionales </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            <tr style='mso-yfti-irow:1;height:13.2pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.3pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>1 </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=406 valign=top style='width:304.8pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Seminarios </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=208 valign=top style='width:156.0pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=205 valign=top style='width:153.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            <tr style='mso-yfti-irow:2;height:13.1pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.3pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>2 </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=406 valign=top style='width:304.8pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Talleres de Tesis </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=208 valign=top style='width:156.0pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=205 valign=top style='width:153.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.1pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            <tr style='mso-yfti-irow:3;height:13.2pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.3pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>3 </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=406 valign=top style='width:304.8pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=208 valign=top style='width:156.0pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=205 valign=top style='width:153.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes;height:13.2pt'>
+                                <td width=47 valign=top style='width:35.15pt;border:solid black 1.0pt;
+                          border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                          padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.3pt;margin-bottom:.0001pt;text-align:center;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>4 </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=406 valign=top style='width:304.8pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                          margin-bottom:0in;margin-left:.1pt;margin-bottom:.0001pt;text-align:left;
+                          text-indent:0in;line-height:107%'><span lang=ES-TRAD style='font-size:11.0pt;
+                          line-height:107%;mso-ansi-language:ES-TRAD'>Defensas de Tesis </span><span lang=ES-TRAD
+                                            style='mso-ansi-language:ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=208 valign=top style='width:156.0pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                                <td width=205 valign=top style='width:153.85pt;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                          mso-border-alt:solid black .5pt;padding:0in 5.7pt 0in 5.4pt;height:13.2pt'>
+                                    <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                          text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                            style='font-size:11.0pt;line-height:107%;mso-ansi-language:ES-TRAD'><span
+                                                style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD style='mso-ansi-language:
+                          ES-TRAD'>
+                                            <o:p></o:p>
+                                        </span></p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                    <o:p>&nbsp;</o:p>
+                                </span></b></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Fecha de Cierre:</span></b><span
+                                lang=ES-TRAD style='mso-ansi-language:ES-TRAD'> {{=edicion_actual.id_edicion.fecha_fin.strftime('%d/%m/%Y')}} </span></p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+        @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 0;
+        mso-generic-font-family: roman;
+        mso-font-pitch: variable;
+        mso-font-signature: -536869121 1107305727 33554432 0 415 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    h1 {
+        mso-style-priority: 9;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        mso-style-link: "Título 1 Car";
+        mso-style-next: Normal;
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 0in;
+        margin-left: .5pt;
+        margin-bottom: .0001pt;
+        text-indent: -.5pt;
+        line-height: 107%;
+        mso-pagination: widow-orphan lines-together;
+        page-break-after: avoid;
+        mso-outline-level: 1;
+        font-size: 16.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-font-kerning: 0pt;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.Ttulo1Car {
+        mso-style-name: "Título 1 Car";
+        mso-style-priority: 9;
+        mso-style-unhide: no;
+        mso-style-locked: yes;
+        mso-style-link: "Título 1";
+        mso-ansi-font-size: 16.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-ascii-font-family: Arial;
+        mso-fareast-font-family: Arial;
+        mso-hansi-font-family: Arial;
+        mso-bidi-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        font-weight: bold;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.SpellE {
+        mso-style-name: "";
+        mso-spl-e: yes;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 11.0in 8.5in;
+        mso-page-orientation: landscape;
+        margin: .75in 70.85pt 49.5pt 70.85pt;
+        mso-header-margin: .5in;
+        mso-footer-margin: .5in;
+        mso-even-header: url("PG-13_archivos/header.htm") eh1;
+        mso-header: url("PG-13_archivos/header.htm") h1;
+        mso-first-header: url("PG-13_archivos/header.htm") fh1;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    table.TableGrid {
+        mso-style-name: TableGrid;
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-unhide: no;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 0in 0in 0in;
+        mso-para-margin: 0in;
+        mso-para-margin-bottom: .0001pt;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'calendario_oficial', docStyle);
+    }
+</script>
+{{end page_js}}
+
+{{block datatable}}
+{{end}}

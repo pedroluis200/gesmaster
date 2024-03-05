@@ -1,0 +1,459 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 1;
+        mso-generic-font-family: roman;
+        mso-font-format: other;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 0 0 0 0 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+        mso-header-margin: .5in;
+        mso-footer-margin: .5in;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-19.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-19 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Dictamen del consejo científico o comisión asesora - Modelo PG
+                    19</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2 row" style="margin: auto;max-width: 600px;">
+                    <div class=WordSection1>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:.15pt;
+                        margin-left:.85pt;line-height:109%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>PG-19 </span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:3.55pt;
+                        margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>{{=centro.upper()}}</span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:3.35pt;
+                        margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>DICTAMEN DEL CONSEJO CIENTÍFICO O
+                                    COMISIÓN ASESORA</span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:6.85pt;
+                        margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>Área del órgano que dictamina:</span></b><span
+                                lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                ___________________________________ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:6.65pt;
+                        margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>Título del programa:</span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <b>
+                                    {{=edicion_actual.id_edicion.id_maestria.nombre}}
+                                </b>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:6.85pt;
+                        margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>Edición: </span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <b>
+                                    {{=edicion_actual.id_edicion.numero}}
+                                </b>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:7.0pt;
+                        margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>Fecha:</span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'> 
+                               <b>
+                                   {{=fecha}}
+                               </b>
+                                <o:p></o:p></span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>Participantes:</span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'> 
+                                <b>
+                                    {{=matricula}}
+                                </b>
+                                <o:p></o:p></span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                        margin-bottom:0in;margin-left:.15in;margin-bottom:.0001pt;text-align:left;
+                        text-indent:0in;line-height:107%'><span lang=ES-TRAD style='mso-ansi-language:
+                        ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Breve
+                                valoración del cumplimiento de los requisitos formales y metodológicos
+                                establecidos para el Programa: relación entre objetivos generales, perfil del
+                                egresado, contenidos, métodos, evaluación y bibliografía a utilizar. <o:p></o:p></span>
+                        </p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>_______________________________________________________________
+                                _____________________________________________________ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Breve
+                                valoración del nivel y categoría del profesor o claustro de profesores: <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>______________________________________________________________
+                                _____________________________________________________ </span><span lang=EN-US>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Se
+                                recomienda para su aprobación: SÍ _____ NO _____ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                        margin-bottom:5.25pt;margin-left:0in;text-align:left;text-indent:0in;
+                        line-height:107%'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                    style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Firma
+                                del Presidente: __________________________<span
+                                    style='mso-spacerun:yes'>                        </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                        margin-bottom:5.4pt;margin-left:0in;text-align:left;text-indent:0in;line-height:
+                        107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:5.0pt;
+                        margin-left:.85pt;line-height:109%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>APROBACIÓN POR EL DECANO O
+                                    DIRECTOR </span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Decano
+                                o Director: <o:p></o:p></span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>________________________________________________
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Firma:
+                                ___________________ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:5.65pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Fecha:
+                                ___________________ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                <o:p>&nbsp;</o:p>
+                            </span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+        @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 1;
+        mso-generic-font-family: roman;
+        mso-font-format: other;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 0 0 0 0 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+        mso-header-margin: .5in;
+        mso-footer-margin: .5in;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'dictamen_consejo_cientifico', docStyle);
+    }
+</script>
+{{end page_js}}
+
+{{block datatable}}
+{{end}}

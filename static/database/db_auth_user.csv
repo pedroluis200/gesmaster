@@ -1,0 +1,3 @@
+TABLE auth_user
+auth_user.id,auth_user.first_name,auth_user.last_name,auth_user.email,auth_user.username,auth_user.password,auth_user.registration_key,auth_user.reset_password_key,auth_user.registration_id
+1,Administrador,Administrador,admin@admin.cu,admin,"pbkdf2(1000,20,sha512)$9b07ee1beeaec2b9$9566eea17094b740999e9c577fb7bacc7520fc6c",<NULL>,<NULL>,<NULL>

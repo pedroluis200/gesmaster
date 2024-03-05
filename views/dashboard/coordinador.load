@@ -1,0 +1,235 @@
+<style>
+    .overview-item .icon {
+        position: absolute;
+        color: white;
+        font-size: x-large;
+        top: 10px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c2">
+            <div class="icon">
+                <i class="zmdi zmdi-local-library"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=edicion_actual.id_edicion.numero}}</h1>
+                                <h5 class="text-center text-light">edición actual del sistema</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c1">
+            <div class="icon">
+                <i class="zmdi zmdi-assignment"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=admisiones_pendientes}}</h1>
+                                <h5 class="text-center text-light">admisiones pendientes</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c3">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=matricula}} /
+                                    {{=edicion_actual.id_edicion.limite_matricula}}</h1>
+                                <h5 class="text-center text-light">estudiantes matriculados</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c4">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts-alt"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=len(profesores)}}</h1>
+                                <h5 class="text-center text-light">profesores de la maestría</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Admisiones pendientes</h4>
+                {{if admisiones:}}
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI/Pasaporte</th>
+                                <th>Usuario</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for admision in admisiones:}}
+                            <tr>
+                                <td>{{=admision.nombre}}</td>
+                                <td>{{=admision.apellido1 + ' ' + admision.apellido2}}</td>
+                                <td>{{=admision.ci}}</td>
+                                <td>
+                                    {{=admision.id_user.username}}
+                                </td>
+                                <td>
+                                    <a href="{{=URL('admision', 'modificar_solicitud', args=admision.id, extension='html')}}"
+                                        class="btn btn-primary btn-rounded text-white mb-2">
+                                        <i class="fas fa-edit"></i>
+                                        Modificar solicitud
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{=URL('admision', 'detalles', args=admision.id, extension='html')}}"
+                                        class="btn btn-info btn-rounded text-white mb-2">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{=URL('admision', 'editar', args=admision.id, extension='html')}}"
+                                        class="btn btn-success btn-rounded text-white mb-2">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#"
+                                        onclick="delete_elem(`{{=URL('admision', 'eliminar', args=admision.id, extension='html')}}`)"
+                                        class="btn btn-danger btn-rounded text-white mb-2">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI/Pasaporte</th>
+                                <th>Usuario</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                {{else:}}
+                <h5 class="text-success">No existen admisiones pendientes</h5>
+                {{pass}}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Temas de tesis pendientes</h4>
+                {{if tesis_pendientes:}}
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI</th>
+                                <th>Usuario</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for row in tesis_pendientes:}}
+                            <tr>
+                                <td>{{=row.tesis.titulo}}</td>
+                                <td>{{=row.admision.nombre}}</td>
+                                <td>{{=row.admision.apellido1 +' '+ row.admision.apellido2}}</td>
+                                <td>{{=row.admision.ci}}</td>
+                                <td>
+                                    <a
+                                        href="{{=URL('usuario', 'detalles', args=row.admision.id_user, extension='html')}}">
+                                        {{=row.admision.id_user.username}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{=URL('tesis', 'modificar_estado', args=row.tesis.id, extension='html')}}"
+                                        class="btn btn-primary btn-rounded text-white mb-2">
+                                        <i class="fas fa-edit"></i>
+                                        Modificar estado
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{=URL('tesis', 'detalles', args=row.tesis.id, extension='html')}}"
+                                        class="btn btn-info btn-rounded text-white mb-2">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#"
+                                        onclick="delete_elem(`{{=URL('tesis', 'eliminar', args=row.tesis.id, extension='html')}}`)"
+                                        class="btn btn-danger btn-rounded text-white mb-2">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Título</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI</th>
+                                <th>Usuario</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                {{else:}}
+                <h5 class="text-success">No existen temas de tesis pendientes</h5>
+                {{pass}}
+            </div>
+        </div>
+    </div>
+</div>

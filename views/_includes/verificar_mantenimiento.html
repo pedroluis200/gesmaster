@@ -1,0 +1,8 @@
+{{settings = db(db.settings.id > 0).select().first()}}
+{{mantenimiento = settings.en_mantenimiento}}
+
+{{if auth.user and mantenimiento:}}
+    {{if auth.has_membership('Profesor') or auth.has_membership('Estudiante'):}}
+        {{redirect(URL('settings', 'en_mantenimiento'))}}
+    {{pass}}
+{{pass}}

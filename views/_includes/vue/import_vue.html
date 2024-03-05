@@ -1,0 +1,33 @@
+<script src="{{=URL('static/js', 'vue-script/vue3.js')}}"></script>
+<script src="{{=URL('static/js', 'axios/axios.min.js')}}"></script>
+<script src="{{=URL('static/js', 'vue-script/vue-i18n.js')}}"></script>
+<script src="{{=URL('static/js', 'vue-script/vuelidate/vue-demi.js')}}"></script>
+<script src="{{=URL('static/js', 'vue-script/vuelidate/core.js')}}"></script>
+<script src="{{=URL('static/js', 'vue-script/vuelidate/validators.js')}}"></script>
+
+<script>
+    const messages = {
+        es: {
+            validations: {
+                required: 'No puede ser vacío',
+                email: 'Dirección no válida',
+                minValue: 'Debe ser mayor a {min}',
+            }
+        },
+    }
+
+    const i18n = VueI18n.createI18n({
+        locale: 'es', // set locale
+        fallbackLocale: 'es', // set fallback locale
+        messages
+    })
+
+    const { createI18nMessage } = VuelidateValidators;
+    const withI18nMessage = createI18nMessage({ t: i18n.global.t.bind(i18n) });
+
+    const validators = {
+        required: withI18nMessage(VuelidateValidators.required),
+        email: withI18nMessage(VuelidateValidators.email),
+        minValue: withI18nMessage(VuelidateValidators.minValue, { withArguments: true }),
+    };
+</script>

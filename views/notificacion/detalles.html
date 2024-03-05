@@ -1,0 +1,55 @@
+{{extend 'layout_admin.html'}}
+
+
+<a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fas fa-arrow-left"></i> </span>
+</a>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-{{=n.tipo}}">
+                <strong class="card-title text-light">Detalles notificación</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <strong>
+                            {{=n.titulo}}
+                        </strong>
+                        <p class="card-text">
+                            {{=n.descripcion}}
+                        </p>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span class="text-{{=n.tipo}} mr-2" style="font-size: 40px;">
+                            {{if n.tipo == 'info':}}
+                            <i class="zmdi zmdi-info-outline"></i>
+                            {{elif n.tipo == 'success':}}
+                            <i class="zmdi zmdi-check-circle"></i>
+                            {{elif n.tipo == 'warning':}}
+                            <i class="zmdi zmdi-alert-polygon"></i>
+                            {{else:}}
+                            <i class="zmdi zmdi-alert-circle-o"></i>
+                            {{pass}}
+                        </span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            {{=n.fecha.strftime('%Y-%m-%d')}}
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <p>
+                            {{=n.fecha.strftime('%H:%M:%S')}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

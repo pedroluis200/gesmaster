@@ -1,0 +1,49 @@
+{{extend 'layout_admin.html'}}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Calificaciones</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Créditos</th>
+                                <th>Profesor</th>
+                                <th>Calificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for actividad in actividades_edicion:}}
+                            <tr>
+                                <td>{{=actividad.id_actividad.nombre}}</td>
+                                <td>{{=actividad.id_actividad.tipo}}</td>
+                                <td>{{=actividad.creditos}}</td>
+                                <td>{{=' '.join([actividad.id_profesor.first_name, actividad.id_profesor.last_name])}}</td>
+                                <td>
+                                    {{if db(db.calificacion.id_actividad_edicion == actividad.id).select():}}
+                                        {{=get_calificacion(db, actividad.id, estudiante.id).nota}}
+                                    {{else:}}
+                                    <span class="badge badge-secondary">No calificado</span>
+                                    {{pass}}
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Créditos</th>
+                                <th>Profesor</th>
+                                <th>Calificación</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

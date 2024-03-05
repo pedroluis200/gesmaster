@@ -1,0 +1,57 @@
+{{extend 'layout_admin.html'}}
+
+<div class="row">
+    <div class="col-12">
+        <a href="{{=URL('select_maestria')}}" class="btn btn-primary mb-2 mr-1">
+            <i class="fa fa-trophy"></i>
+            Maestrías
+        </a>
+        
+        <a href="{{=URL('select_edicion', args=edicion.id_maestria)}}" class="btn btn-info mb-2">
+            <i class="fa fa-table mr-1"></i>
+            Ediciones
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Seleccionar actividad</h4>
+                <h5 class="mb-1">Maestría: {{=edicion.id_maestria.nombre}}</h5>
+                <h5 class="mb-3">Edición # {{=edicion.numero}}</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for row in actividades:}}
+                            <tr>
+                                <td>{{=row.id_actividad.nombre}}</td>
+                                <td>
+                                    <a href="{{=URL('calificar', args=row.id)}}"
+                                        class="btn btn-success btn-rounded text-white mb-2">
+                                        <i class="fas fa-pencil-square-o"></i>
+                                        Calificar
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

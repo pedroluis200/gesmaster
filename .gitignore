@@ -1,0 +1,6 @@
+.idea
+databases/
+*log
+__pycache__
+sessions/
+errors/

@@ -1,0 +1,20 @@
+{{if auth.has_membership('Coordinador'):}}
+
+{{maestria = db(db.coordinador_maestria.id_user == auth.user.id).select().first()}}
+{{rows = db(db.edicion.id_maestria == maestria.id_maestria).select()}}
+{{edicion_activa_sistema = None}}
+
+{{if not rows:}}
+    {{if request.controller != 'edicion':}}
+        {{redirect(URL('edicion', 'crear'))}}
+    {{else:}}
+        {{if request.function != 'crear':}}
+            {{redirect(URL('edicion', 'crear'))}}
+        {{pass}}
+    {{pass}}
+{{else:}}
+    {{edicion_activa_sistema = db(db.edicion_actual.id_user == auth.user.id).select().first().id_edicion}}
+{{pass}}
+
+
+{{pass}}

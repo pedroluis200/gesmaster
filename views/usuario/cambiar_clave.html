@@ -1,0 +1,41 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('detalles', args=registro.id)}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fas fa-arrow-left"></i> </span>
+</a>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Cambiar contraseña</h4>
+
+                <div class="mt-4">
+                    {{=form.custom.begin}}
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{=form.custom.label.password}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.password}}</div>
+                            {{if form.errors.password:}}
+                            <p class="text-danger">{{=form.errors.password}}</p>
+                            {{pass}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{=form.custom.label.repeat}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.repeat}}</div>
+                            {{if form.errors.repeat:}}
+                            <p class="text-danger">{{=form.errors.repeat}}</p>
+                            {{pass}}
+                        </div>
+                    </div>
+
+                    <br>
+                    {{=form.custom.submit}}
+                    {{=form.custom.end}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

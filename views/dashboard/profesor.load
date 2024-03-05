@@ -1,0 +1,119 @@
+<style>
+    .overview-item .icon {
+        position: absolute;
+        color: white;
+        font-size: x-large;
+        top: 10px;
+    }
+
+    @media (max-width: 1120px) {
+        #panel-img {
+            display: none;
+        }
+
+        #panel {
+            padding: 25px;
+        }
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c2">
+            <div class="icon">
+                <i class="zmdi zmdi-local-library"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=asignaturas}}</h1>
+                                <h5 class="text-center text-light">actividades asignadas</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c1">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts-alt"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=tutorias}}</h1>
+                                <h5 class="text-center text-light">tutorías de investigaciones</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c4">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts-outline"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=creditos}}</h1>
+                                <h5 class="text-center text-light">créditos obtenidos en actividades o eventos</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c3">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=no_calificado}}</h1>
+                                <h5 class="text-center text-light">actividades sin calificar</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body card-block">
+                <div class="row align-items-center">
+                    <div class="col-md-4 text-center" id="panel-img">
+                        <img src="{{=URL('static/images', 'profesor.svg')}}" alt="Welcome" width="250">
+                    </div>
+                    <div id="panel" class="col-lg-8 col-md-12 pr-5">
+                        <h3>Bienvenido al Panel del Profesor</h3>
+                        <br>
+                        <p>El panel del profesor de <b>GesMaster</b> le brinda la posibilidad de calificar las
+                            actividades que le hayan asignado, además de, revisar las tutorías de investigaciones y
+                            gestionar sus créditos obtenidos en otras
+                            actividades.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

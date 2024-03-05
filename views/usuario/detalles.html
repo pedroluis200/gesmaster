@@ -1,0 +1,45 @@
+{{extend 'layout_admin.html'}}
+
+
+{{if auth.has_membership('Administrador'):}}
+<a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fas fa-arrow-left"></i> </span>
+</a>
+
+<a href="{{=URL('editar', args=usuario.id)}}" class="btn mb-3 btn-rounded btn-success text-white">
+    <span><i class="fas fa-edit"></i> </span>
+    Editar
+</a>
+
+<a href="{{=URL('cambiar_clave', args=usuario.id)}}" class="btn mb-3 btn-primary btn-rounded text-white">
+    <span><i class="fas fa-refresh"></i> </span>
+    Cambiar contraseña
+</a>
+{{pass}}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Detalles Usuario</h5>
+        <div class="row justify-content-start mt-4">
+            <div class="col-md-12">
+                <strong class="text-dark mr-2 mb-4">Nombre y apellidos:</strong>
+                <span>{{=usuario.first_name + " " + usuario.last_name}}</span>
+                <br>
+                <strong class="text-dark mr-2 mb-4">Nombre de usuario:</strong>
+                <span>{{=usuario.username}}</span>
+                <br>
+                <strong class="text-dark mr-2 mb-4">Correo:</strong>
+                <span>{{=usuario.email}}</span>
+                <br>
+                <strong class="text-dark mr-2 mb-4">Rol:</strong>
+                <span>{{=rol}}</span>
+                <br>
+                {{if auth.has_membership(user_id=usuario.id, role='Coordinador'):}}
+                <strong class="text-dark mr-2 mb-4">Maestría asociada:</strong>
+                <span>{{=usuario.maestria_usuario.id_maestria.nombre}}</span>
+                <br>
+                {{pass}}
+            </div>
+        </div>
+    </div>
+</div>

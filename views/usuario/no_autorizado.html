@@ -1,0 +1,30 @@
+{{extend 'layout_admin.html'}}
+
+<div class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-xl-12">
+                <div class="form-input-content">
+                    <div class="card mb-0">
+                        <div class="card-body pt-5">
+                            <div class="d-flex align-items-center flex-wrap justify-content-center pd-20">
+                                <div class="pd-10">
+                                    <div class="text-center">
+                                        <h1 class="mb-2">Error</h1>
+                                        <h3 class="mb-3">No autorizado</h3>
+                                        <h4 class="mb-4">Lo siento, esta funcionalidad no está disponible para usted.</h4>
+                                        <div class="pt-20 mx-auto" style="max-width: min-content;">
+                                            <a href="{{=URL('dashboard', 'index')}}"
+                                                class="btn btn-success btn-block btn-lg">Volver al inicio</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

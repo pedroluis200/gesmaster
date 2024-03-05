@@ -1,0 +1,24 @@
+<div class="modal-content">
+    {{=form.custom.begin}}
+    <div class="modal-header">
+        <h5 class="modal-title" id="staticModalLabel">Calificar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            {{=form.custom.label.nota}}
+            {{=form.custom.widget.nota}}
+            <br>
+            {{=form.custom.label.tipo}}
+            {{=form.custom.widget.tipo}}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        {{=form.custom.submit}}
+    </div>
+    {{=form.custom.end}}
+</div>
+

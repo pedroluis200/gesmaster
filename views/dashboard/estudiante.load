@@ -1,0 +1,322 @@
+{{if not admision_enviada and not maestrias:}}
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading mb-3">
+                <span class="fa fa-warning mr-2"></span> Importante!!
+            </h4>
+            <p>
+                Lo sentimos, no hay matrículas abiertas en ninguna de las maestrías.
+            </p>
+
+            {{if coordinadores:}}
+            <p class="mt-2">
+                Puede contactar a los coordinadores en los
+                siguientes correos electrónicos:
+            </p>
+
+            <ul class="mt-2 ml-4">
+                {{for c in coordinadores:}}
+                <li>
+                    <strong>{{=c.auth_user.email}}</strong> - {{=c.auth_user.maestria_usuario.id_maestria.nombre}}
+                </li>
+                {{pass}}
+            </ul>
+            {{pass}}
+        </div>
+    </div>
+</div>
+{{elif not admision_enviada:}}
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading mb-3">
+                <span class="fa fa-info-circle mr-2"></span> Bienvenido!!
+            </h4>
+            <p>Antes de comenzar, es necesario que envíe sus datos para su admisión en una de nuestras maestrías.
+            </p>
+            <hr>
+            <a href="{{=URL('admision', 'seleccionar_maestria', extension='html')}}" class="btn btn-primary">
+                <span class="fa fa-file-text mr-2"></span>
+                Enviar admisión
+            </a>
+        </div>
+    </div>
+</div>
+{{elif admision_enviada.estado == 'Pendiente':}}
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading mb-3">
+                <span class="fa fa-info-circle mr-2"></span> Bienvenido!!
+            </h4>
+
+            <p>Su admisión no ha sido aprobada aún por el grupo coordinador de la maestría.
+            </p>
+            <p class="mt-2">En breve se revisará su solicitud!!</p>
+        </div>
+    </div>
+</div>
+{{elif admision_enviada.estado == 'No aprobado':}}
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-danger">
+                <strong class="card-title text-light">Solicitud no aprobada</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-1">
+                        <span class="text-danger mr-2" style="font-size: 40px;">
+                            <i class="zmdi zmdi-alert-circle-o"></i>
+                        </span>
+                    </div>
+                    <div class="col-11">
+                        <p class="mb-2">
+                            Su solicitud no ha sido aprobada por el comité coordinador de la maestría.
+                        </p>
+
+                        {{if coordinadores:}}
+                        <p class="mt-2">
+                            Puede contactar a los coordinadores en los
+                            siguientes correos electrónicos:
+                        </p>
+
+                        <ul class="mt-2 ml-4">
+                            {{for c in coordinadores:}}
+                            <li>
+                                <strong>{{=c.auth_user.email}}</strong> -
+                                {{=c.auth_user.maestria_usuario.id_maestria.nombre}}
+                            </li>
+                            {{pass}}
+                        </ul>
+                        {{pass}}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{elif admision_enviada.estado == 'Baja':}}
+<div class="row justify-content-md-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-danger">
+                <strong class="card-title text-light">Baja en el curso</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-1">
+                        <span class="text-danger mr-2" style="font-size: 40px;">
+                            <i class="zmdi zmdi-alert-circle-o"></i>
+                        </span>
+                    </div>
+                    <div class="col-11">
+                        <p class="mb-2">
+                            Se le ha dado de baja del curso de maestría.
+                        </p>
+
+                        {{if coordinadores:}}
+                        <p class="mt-2">
+                            Puede contactar a los coordinadores en los
+                            siguientes
+                            correos electrónicos:
+                        </p>
+
+                        <ul class="mt-2 ml-4">
+                            {{for c in coordinadores:}}
+                            <li>
+                                <strong>{{=c.auth_user.email}}</strong> -
+                                {{=c.auth_user.maestria_usuario.id_maestria.nombre}}
+                            </li>
+                            {{pass}}
+                        </ul>
+                        {{pass}}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{else:}}
+<style>
+    .overview-item .icon {
+        position: absolute;
+        color: white;
+        font-size: x-large;
+        top: 10px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="overview-item overview-item--c1">
+            <div class="icon">
+                <i class="zmdi zmdi-book"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h3 class="mt-3 mb-3 text-light">
+                                    {{=admision_enviada.id_edicion.id_maestria.nombre}}
+                                </h3>
+                                <h5 class="text-center text-light">
+                                    Maestría
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="overview-item overview-item--c2">
+            <div class="icon">
+                <i class="zmdi zmdi-account-circle"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h3 class="mt-3 mb-3 text-light">
+                                    {{if tesis:}}
+                                    {{=tesis.tutor.full_name if tesis.tutor else 'No asigando'}}
+                                    {{else:}}
+                                    No se ha enviado el tema de tesis
+                                    {{pass}}
+                                </h3>
+                                <h5 class="text-center text-light">
+                                    Tutor
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{if not tesis:}}
+    <div class="col-sm-4">
+        <div class="overview-item overview-item--c3">
+            <div class="icon">
+                <i class="zmdi zmdi-alert-polygon"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h4 class="mt-3 mb-3 text-light">No ha enviado su tema de tesis</h4>
+                                <h5 class="text-center text-light">
+                                    <a href="{{=URL('tesis', 'enviar_evaluacion', extension='html')}}"
+                                        class="btn btn-dark">Enviar</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{elif tesis.estado == 'Pendiente':}}
+    <div class="col-sm-4">
+        <div class="overview-item overview-item--c1">
+            <div class="icon">
+                <i class="zmdi zmdi-info"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h3 class="mt-3 mb-3 text-light">Su tema de tesis está pendiente a revisión</h3>
+                                <h5 class="text-center text-light">
+                                    <a href="{{=URL('tesis', 'detalles_evaluacion', extension='html')}}"
+                                        class="btn btn-light">Más información</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{elif tesis.estado == 'No aprobado':}}
+    <div class="col-sm-4">
+        <div class="overview-item overview-item--c3">
+            <div class="icon">
+                <i class="zmdi zmdi-info"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h3 class="mt-3 mb-3 text-light">Su tema de tesis no fue aprobado</h3>
+                                <h5 class="text-center text-light">
+                                    <a href="{{=URL('tesis', 'volver_enviar_evaluacion', extension='html')}}"
+                                        class="btn btn-light">Volver a enviar</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{else:}}
+    <div class="col-sm-4">
+        <div class="overview-item overview-item--c4">
+            <div class="icon">
+                <i class="zmdi zmdi-info"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h3 class="mt-3 mb-3 text-light">Tema de tesis aprobado</h3>
+                                <h5 class="text-center text-light">
+                                    <a href="{{=URL('tesis', 'detalles_evaluacion', extension='html')}}"
+                                        class="btn btn-sm btn-light">Más información</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{pass}}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body card-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 text-center" id="panel-img">
+                            <img src="{{=URL('static/images', 'student.svg')}}" alt="Welcome" width="250">
+                        </div>
+                        <div id="panel" class="col-lg-8 col-md-12 pr-5">
+                            <h3>Bienvenido al Panel de Estudiante</h3>
+                            <br>
+                            <p>El panel de estudiante de <b>GesMaster</b> le brinda la posibilidad de matricular en
+                                cualquiera de las maestrías disponibles, además de conocer sus calificaciones y enviar
+                                su tema de tesis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{pass}}

@@ -1,0 +1,349 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+    }
+
+    @font-face {
+        font-family: Calibri;
+        panose-1: 2 15 5 2 2 2 4 3 2 4;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 8.0pt;
+        margin-left: 0in;
+        line-height: 107%;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoChpDefault {
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoPapDefault {
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <a href="{{=URL('dictamen_certificacion_calificaciones')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-03.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-03 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Certificación de calificaciones y créditos - Modelo PG 03</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2 row" style="margin: auto;width: 600px;">
+                    <div class=WordSection1>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                        margin-left:.5pt;margin-bottom:.0001pt;text-indent:-.5pt;page-break-after:avoid'><b><span
+                                    lang=ES-TRAD style='font-size:16.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'>PG-03  </span></b></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:3.35pt;
+                        margin-bottom:0in;margin-left:.5pt;margin-bottom:.0001pt;text-align:center;
+                        text-indent:-.5pt'><b><i><span lang=ES-TRAD style='font-size:12.0pt;line-height:
+                        107%;font-family:"Arial","sans-serif";color:black'>
+                                        {{=centro.upper()}}
+                                    </span></i></b></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><b><i><span lang=ES-TRAD
+                                        style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></i></b></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:3.5pt;
+                        margin-bottom:0in;margin-left:.5pt;margin-bottom:.0001pt;text-align:center;
+                        text-indent:-.5pt'><b><i><span lang=ES-TRAD style='font-size:12.0pt;line-height:
+                        107%;font-family:"Arial","sans-serif";color:black'>CERTIFICACIÓN DE
+                                        CALIFICACIONES Y CRÉDITOS </span></i></b></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><b><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></b></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><b><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></b></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><b><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></b></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                        margin-left:.85pt;margin-bottom:.0001pt;text-align:justify;text-indent:-.5pt;
+                        line-height:103%'><span lang=ES-TRAD style='font-size:12.0pt;line-height:103%;
+                        font-family:"Arial","sans-serif";color:black'>_________________________,
+                                Secretario Docente o Secretario General del Centro, certifica por este medio
+                                que el alumno:
+                                <b>
+                                    {{=' '.join([estudiante.nombre, estudiante.apellido1, estudiante.apellido2])}}
+                                </b>
+                                cursó y aprobó el Programa de
+                                <b>
+                                    {{=maestria_nombre}}
+                                </b>
+                                ,
+                                en su Edición
+                                <b>
+                                    {{=edicion_actual.id_edicion.numero}}
+                                </b>
+                                impartido en esta Institución, en el período comprendido
+                                del
+                                {{=edicion_actual.id_edicion.fecha_inicio.strftime('%d/%m/%Y')}}
+                                al
+                                {{=edicion_actual.id_edicion.fecha_fin.strftime('%d/%m/%Y')}}
+                                con las calificaciones siguientes: </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width="100%"
+                            style='width:100.0%;border-collapse:collapse'>
+                            <tr style='height:16.4pt'>
+                                <td width="59%" valign=top style='width:59.08%;border:solid black 1.0pt;
+                          padding:0in .05pt 0in 3.5pt;height:16.4pt'>
+                                    <p class=MsoNormal align=center style='margin-top:0in;margin-right:.05in;
+                          margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                          line-height:normal'><b><span lang=ES-TRAD style='font-size:12.0pt;font-family:
+                          "Arial","sans-serif";color:black'>ACTIVIDADES </span></b></p>
+                                </td>
+                                <td width="15%" valign=top style='width:15.3%;border:solid black 1.0pt;
+                          border-left:none;padding:0in .05pt 0in 3.5pt;height:16.4pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;text-align:justify;line-height:normal'><b><span
+                                                lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'>CRÉDITOS </span></b></p>
+                                </td>
+                                <td width="25%" valign=top style='width:25.64%;border:solid black 1.0pt;
+                          border-left:none;padding:0in .05pt 0in 3.5pt;height:16.4pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;text-align:justify;line-height:normal'><b><span
+                                                lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'>CALIFICACIONES </span></b></p>
+                                </td>
+                            </tr>
+
+                            {{for c in calificaciones:}}
+                            <tr style='height:14.3pt'>
+                                <td width="59%" valign=top style='width:59.08%;border:solid black 1.0pt;
+                          border-top:none;padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+                          normal'><span style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'>
+                                            <b>
+                                                {{=c.id_actividad_edicion.id_actividad.nombre}}
+                                            </b>
+                                        </span></p>
+                                </td>
+                                <td width="15%" valign=top style='width:15.3%;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;line-height:normal'><span lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'>
+                                            <b>
+                                                {{=c.id_actividad_edicion.creditos}}
+                                            </b>
+                                        </span></p>
+                                </td>
+                                <td width="25%" valign=top style='width:25.64%;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;line-height:normal'><span lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'>
+                                            <b>
+                                                {{=c.nota}}
+                                            </b>
+                                        </span></p>
+                                </td>
+                            </tr>
+                            {{pass}}
+                            <tr style='height:14.3pt'>
+                                <td width="59%" valign=top style='width:59.08%;border:solid black 1.0pt;
+                          border-top:none;padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+                          normal'><span style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'> </span></p>
+                                </td>
+                                <td width="15%" valign=top style='width:15.3%;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;line-height:normal'><span lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'> </span></p>
+                                </td>
+                                <td width="25%" valign=top style='width:25.64%;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;line-height:normal'><span lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'> </span></p>
+                                </td>
+                            </tr>
+                            <tr style='height:14.3pt'>
+                                <td width="59%" valign=top style='width:59.08%;border:solid black 1.0pt;
+                          border-top:none;padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+                          normal'><span style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'> </span></p>
+                                </td>
+                                <td width="15%" valign=top style='width:15.3%;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;line-height:normal'><span lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'> </span></p>
+                                </td>
+                                <td width="25%" valign=top style='width:25.64%;border-top:none;border-left:
+                          none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                          padding:0in .05pt 0in 3.5pt;height:14.3pt'>
+                                    <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+                          margin-left:.1pt;margin-bottom:.0001pt;line-height:normal'><span lang=ES-TRAD style='font-size:12.0pt;font-family:"Arial","sans-serif";
+                          color:black'> </span></p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt;text-align:justify;text-indent:-.5pt;line-height:103%'><span lang=ES-TRAD
+                                style='font-size:12.0pt;line-height:103%;font-family:"Arial","sans-serif";
+                        color:black'>Y para que así conste, firmo la presente a los ______ días del
+                                mes____________ año____. </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span lang=ES-TRAD style='font-size:12.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:3.1pt;
+                        margin-left:.85pt;text-align:justify;text-indent:-.5pt;line-height:103%'><span lang=ES-TRAD
+                                style='font-size:12.0pt;line-height:103%;font-family:"Arial","sans-serif";
+                        color:black'>(Firma del Secretario) </span></p>
+
+                        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><b><span lang=ES-TRAD style='font-size:16.0pt;line-height:107%;font-family:"Arial","sans-serif";
+                        color:black'> </span></b></p>
+
+                        <p class=MsoNormal>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+        @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+    }
+
+    @font-face {
+        font-family: Calibri;
+        panose-1: 2 15 5 2 2 2 4 3 2 4;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 8.0pt;
+        margin-left: 0in;
+        line-height: 107%;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoChpDefault {
+        font-family: "Calibri", "sans-serif";
+    }
+
+    .MsoPapDefault {
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'certificacion_calificaciones', docStyle);
+    }
+</script>
+{{end page_js}}
+
+{{block datatable}}
+{{end}}

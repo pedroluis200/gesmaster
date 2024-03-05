@@ -1,0 +1,31 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-arrow-left"></i> </span>
+</a>
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Crear</strong> actividad
+            </div>
+            <div class="card-body card-block">
+                {{=form}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+<script>
+    jQuery(document).ready(function () {
+        jQuery('#actividad_optativo__row').hide();
+        jQuery('#actividad_tipo').change(function () {
+            if (jQuery('#actividad_tipo').val() === 'Lectiva')
+                jQuery('#actividad_optativo__row').show();
+            else jQuery('#actividad_optativo__row').hide();
+        });
+    });
+</script>
+{{end page_js}}

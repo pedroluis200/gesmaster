@@ -1,0 +1,128 @@
+<style>
+    .overview-item .icon {
+        position: absolute;
+        color: white;
+        font-size: x-large;
+        top: 10px;
+    }
+
+    @media (max-width: 1120px) {
+        #panel-img {
+            display: none;
+        }
+        #panel{
+            padding: 25px;
+        }
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c2">
+            <div class="icon">
+                <i class="zmdi zmdi-local-library"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=maestrias}}</h1>
+                                <h5 class="text-center text-light">maestrías</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c1">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts-alt"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=coordinadores}}</h1>
+                                <h5 class="text-center text-light">coordinadores</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c3">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts-outline"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=profesores}}</h1>
+                                <h5 class="text-center text-light">profesores</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="overview-item overview-item--c4">
+            <div class="icon">
+                <i class="zmdi zmdi-accounts"></i>
+            </div>
+            <div class="overview__inner text-center">
+                <div class="overview-box clearfix px-2 pb-4">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="text">
+                                <h1 class="mb-3 text-light">{{=estudiantes}}</h1>
+                                <h5 class="text-center text-light">estudiantes</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body card-block">
+                <div class="row">
+                    <div class="col-md-4" id="panel-img">
+                        <img src="{{=URL('static/images', 'secure.svg')}}" alt="Welcome" width="400">
+                    </div>
+                    <div id="panel" class="col-lg-8 col-md-12 pt-4 pr-5">
+                        <h3>Bienvenido al Panel de Administración</h3>
+                        <br>
+                        <p>El panel de administración de <b>GesMaster</b> le brinda la posibilidad de gestionar los
+                            usuarios del sistema y las maestrías activas en la institución. Puede comenzar creando los
+                            usuarios o las maestrías:</p>
+
+                        <div class="mt-4">
+                            <a href="{{=URL('usuario', 'crear', extension='html')}}" class="btn btn-primary mb-2">
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Nuevo usuario
+                            </a>
+                            <a href="{{=URL('maestria', 'crear', extension='html')}}" class="btn btn-success mb-2">
+                                <i class="fas fa-trophy mr-2"></i>
+                                Nueva maestría
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

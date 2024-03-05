@@ -1,0 +1,76 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-arrow-left"></i> </span>
+</a>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Editar usuario</h4>
+
+                <div class="mt-4">
+                    {{=form.custom.begin}}
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{=form.custom.label.first_name}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.first_name}}</div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            {{=form.custom.label.last_name}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.last_name}}</div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            {{=form.custom.label.username}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.username}}</div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            {{=form.custom.label.email}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.email}}</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+
+                        <div class="col-sm-6">
+                            {{=form.custom.label.rol}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.rol}}</div>
+                        </div>
+                        
+                        <div class="col-sm-6" id="maestria">
+                            {{=form.custom.label.maestria}} <span class="error">*</span>
+                            <div class="mb-2">{{=form.custom.widget.maestria}}</div>
+                        </div>
+
+                    </div>
+
+                    <br>
+                    {{=form.custom.submit}}
+                    {{=form.custom.end}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+<script>
+    jQuery(document).ready(function () {
+        if (jQuery('#no_table_rol').val() === '2')
+            jQuery('#maestria').show();
+        else jQuery('#maestria').hide();
+        jQuery('#no_table_rol').change(function () {
+            if (jQuery('#no_table_rol').val() === '2')
+                jQuery('#maestria').show();
+            else jQuery('#maestria').hide();
+        });
+    });
+</script>
+{{end page_js}}

@@ -1,0 +1,381 @@
+<script type="module">
+    const { createApp } = Vue
+    const { useVuelidate } = Vuelidate
+    const { required, email, minValue } = validators
+
+    createApp({
+        setup() {
+            return { v$: useVuelidate() }
+        },
+        async mounted() {
+            await this.get_data();
+        },
+        data() {
+            return {
+                step: 0,
+                steps: [false, true, true, true],
+                activeClass: 'btn-primary',
+                disabledClass: 'btn-outline-secondary',
+
+                editar_carnet_1: false,
+                error_carnet_1: false,
+                editar_carnet_2: false,
+                error_carnet_2: false,
+                editar_foto_titulo: false,
+                error_foto_titulo: false,
+                editar_cv: false,
+                error_cv: false,
+                editar_carta_sindicato: false,
+                error_carta_sindicato: false,
+                disabled_btn: false,
+
+                informacion_personal: {
+                    nombre: '',
+                    apellido1: '',
+                    apellido2: '',
+                    ci: '',
+                    pasaporte: '',
+                    pais: '',
+                    sexo: '',
+                    foto_ci_1: '',
+                    foto_ci_2: ''
+                },
+                direccion_particular: {
+                    calle: '',
+                    apto: '',
+                    numero_residencia: '',
+                    entre_direccion: '',
+                    telefono: '',
+                    correo: '',
+                    provincia_residencia: '',
+                    municipio_residencia: '',
+                },
+                datos_graduado: {
+                    graduado_de: '',
+                    nombre_universidad: '',
+                    pais_universidad: '',
+                    fecha_graduado: '',
+                    numero_universidad: '',
+                    tomo: '',
+                    folio: '',
+                    foto_titulo: '',
+                },
+                datos_laborales: {
+                    ocupacion: '',
+                    experiencia: 0,
+                    centro_laboral: '',
+                    forma_propiedad: '',
+                    calle_trabajo: '',
+                    numero_trabajo: '',
+                    entre_trabajo: '',
+                    provincia_trabajo: '',
+                    municipio_trabajo: '',
+                    telefono_trabajo: '',
+                    osde: '',
+                    organismo: '',
+                    sector_estrategico: '',
+                    cv: '',
+                    carta_sindicato: '',
+                },
+
+            }
+        },
+        computed: {
+            msgEnviar() { return this.disabled_btn ? 'Procesando' : 'Enviar'; }
+        },
+        validations() {
+            const rules = {};
+
+            if (this.step === 0) {
+                rules.informacion_personal = {
+                    nombre: { required },
+                    apellido1: { required },
+                    apellido2: { required },
+                    pais: { required },
+                };
+
+                if (this.editar_carnet_1) {
+                    rules.informacion_personal.foto_ci_1 = { required }
+                }
+
+                if (this.editar_carnet_2) {
+                    rules.informacion_personal.foto_ci_2 = { required }
+                }
+            }
+            else if (this.step === 1) {
+                rules.direccion_particular = {
+                    correo: { email },
+                    provincia_residencia: { required },
+                    municipio_residencia: { required },
+                };
+            }
+            else if (this.step === 2) {
+                rules.datos_graduado = {
+                    graduado_de: { required },
+                };
+
+                if (this.editar_foto_titulo) {
+                    rules.datos_graduado.foto_titulo = { required }
+                }
+            }
+            else {
+                rules.datos_laborales = {
+                    centro_laboral: { required },
+                    ocupacion: { required },
+                    experiencia: { minValue: minValue(0) },
+                    forma_propiedad: { required },
+                    organismo: { required },
+                };
+
+                if (this.editar_cv) {
+                    rules.datos_laborales.cv = { required }
+                }
+
+                if (this.editar_carta_sindicato) {
+                    rules.datos_laborales.carta_sindicato = { required }
+                }
+            }
+
+            return rules;
+
+        },
+        methods: {
+            async get_data() {
+                const self = this;
+                await axios.get(url_get_data)
+                    .then(function (response) {
+                        const admision = { ...response.data.admision }
+                        for (const elem in admision) {
+                            if (self.informacion_personal.hasOwnProperty(elem)) {
+                                self.informacion_personal[elem] = admision[elem];
+                            }
+                            else if (self.direccion_particular.hasOwnProperty(elem)) {
+                                self.direccion_particular[elem] = admision[elem];
+                            }
+                            else if (self.datos_graduado.hasOwnProperty(elem)) {
+                                self.datos_graduado[elem] = admision[elem];
+                            }
+                            else if (self.datos_laborales.hasOwnProperty(elem)) {
+                                self.datos_laborales[elem] = admision[elem];
+                            }
+                        }
+
+                        self.informacion_personal.foto_ci_1 = '';
+                        self.informacion_personal.foto_ci_2 = '';
+                        self.datos_graduado.foto_titulo = '';
+                        self.datos_laborales.cv = '';
+                        self.datos_laborales.carta_sindicato = '';
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                    });
+            },
+            async incrementStep() {
+                const continueForm = await this.validate(this.step)
+
+                if (continueForm) {
+                    this.step++;
+                    this.updateSteps();
+                }
+            },
+            decrementStep() {
+                this.step--;
+                this.updateSteps();
+            },
+            updateSteps() {
+                this.steps.forEach((element, index) => {
+                    if (index === this.step)
+                        this.steps[index] = false;
+                    else
+                        this.steps[index] = true;
+
+                });
+            },
+            async validate(option) {
+                let continueForm = true;
+                if (option === 0) {
+                    const isFormCorrect = await this.v$.$validate();
+                    if (!isFormCorrect) {
+                        continueForm = false;
+                    }
+                    else if (this.editar_carnet_1 && !this.validateImage(this.informacion_personal.foto_ci_1)) {
+                        this.error_carnet_1 = true;
+                        continueForm = false;
+                    }
+                    else if (this.editar_carnet_2 && !this.validateImage(this.informacion_personal.foto_ci_2)) {
+                        this.error_carnet_2 = true;
+                        continueForm = false;
+                    }
+
+                    // if (continueForm) {
+                    //     await this.sendData();
+                    // }
+                }
+                else if (option === 1) {
+                    const isFormCorrect = await this.v$.$validate();
+                    if (!isFormCorrect) {
+                        continueForm = false;
+                    }
+                }
+                else if (option === 2) {
+                    const isFormCorrect = await this.v$.$validate();
+                    this.datos_graduado.fecha_graduado = this.getGraduateDate();
+                    if (!isFormCorrect) {
+                        continueForm = false;
+                    }
+                    else if (this.editar_foto_titulo && !this.validateImage(this.datos_graduado.foto_titulo, true)) {
+                        this.error_foto_titulo = true;
+                        continueForm = false;
+                    }
+                }
+                else if (option === 3) {
+                    const isFormCorrect = await this.v$.$validate();
+                    if (!isFormCorrect) {
+                        continueForm = false;
+                    }
+                    else if (this.editar_cv && !this.validateCV(this.datos_laborales.cv)) {
+                        this.error_cv = true;
+                        continueForm = false;
+                    }
+                    else if (this.editar_carta_sindicato && !this.validateCarta(this.datos_laborales.carta_sindicato)) {
+                        this.error_carta_sindicato = true;
+                        continueForm = false;
+                    }
+                    else {
+                        await this.sendData();
+                    }
+                }
+
+                return continueForm;
+            },
+            async handleFotoCarnet1(event) {
+                this.informacion_personal.foto_ci_1 = event.target.files[0];
+                this.error_carnet_1 = false;
+            },
+            async handleFotoCarnet2(event) {
+                this.informacion_personal.foto_ci_2 = event.target.files[0];
+                this.error_carnet_2 = false;
+            },
+            async handleFotoTitulo(event) {
+                this.datos_graduado.foto_titulo = event.target.files[0];
+                this.error_foto_titulo = false;
+            },
+            async handleCV(event) {
+                this.datos_laborales.cv = event.target.files[0];
+                this.error_cv = false;
+            },
+            async handleCarta(event) {
+                this.datos_laborales.carta_sindicato = event.target.files[0];
+                this.error_carta_sindicato = false;
+            },
+            getGraduateDate() {
+                return document.getElementById('graduate_date').value;
+            },
+            validateImage(file, is_titulo = false) {
+                let isValid = true;
+                const extensions = ['png', 'gif', 'jpg', 'jpeg'];
+
+                let typeImg = file.type.split('/');
+                typeImg = typeImg[typeImg.length - 1];
+
+                if (!extensions.includes(typeImg)) {
+                    isValid = false;
+                }
+                else if (is_titulo) {
+                    if (file.size / 1024 > 2048) {
+                        isValid = false;
+                    }
+                }
+                else {
+                    if (file.size / 1024 > 512) {
+                        isValid = false;
+                    }
+                }
+
+                return isValid;
+            },
+            validateCV(file) {
+                let isValid = true;
+                const extensions = ['pdf', 'msword'];
+
+                let typeDoc = file.type.split('/');
+                typeDoc = typeDoc[typeDoc.length - 1];
+
+                if (!extensions.includes(typeDoc)) {
+                    isValid = false;
+                }
+                else {
+                    if (file.size / 1024 > 10240) {
+                        isValid = false;
+                    }
+                }
+
+                return isValid;
+            },
+            validateCarta(file) {
+                let isValid = true;
+                const extensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf', 'msword'];
+
+                let typeDoc = file.type.split('/');
+                typeDoc = typeDoc[typeDoc.length - 1];
+
+                if (!extensions.includes(typeDoc)) {
+                    isValid = false;
+                }
+                else {
+                    if (file.size / 1024 > 2048) {
+                        isValid = false;
+                    }
+                }
+
+                return isValid;
+            },
+            async sendData() {
+                const data = {
+                    id_admision: registro,
+                    ...this.informacion_personal,
+                    ...this.direccion_particular,
+                    ...this.datos_graduado,
+                    ...this.datos_laborales
+                }
+
+                if (!this.editar_carnet_1) {
+                    delete data.foto_ci_1;
+                }
+                if (!this.editar_carnet_2) {
+                    delete data.foto_ci_2;
+                }
+                if (!this.editar_foto_titulo) {
+                    delete data.foto_titulo;
+                }
+                if (!this.editar_cv) {
+                    delete data.cv;
+                }
+                if (!this.editar_carta_sindicato) {
+                    delete data.carta_sindicato;
+                }
+
+                this.disabled_btn = true;
+
+                const self = this;
+
+                await axios.post("{{=URL('admision', 'api_editar')}}", data, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then(function (response) {
+                        location.href = url_redirect
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                        self.disabled_btn = false;
+                    });
+
+            }
+        },
+        compilerOptions: {
+            delimiters: ["[[", "]]"]
+        }
+    }).use(i18n).mount('#app')
+</script>

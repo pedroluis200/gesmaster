@@ -1,0 +1,178 @@
+{{extend 'layout_front.html'}}
+
+{{block head}}
+<link href="{{=URL('static/frontlayout', 'css/styles.css')}}" rel="stylesheet" media="all">
+{{end head}}
+<!-- Mashead header-->
+<header class="masthead">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+                <!-- Mashead text and app badges-->
+                <div class="mb-5 mb-lg-0 text-center text-lg-start">
+                    <h1 class="display-1 lh-1 mb-3">Educación de posgrado</h1>
+                    <p class="lead fw-normal text-muted mb-5">Ofrecemos cursos de forma sistemática dirigidos a
+                        profundizar en conocimientos avanzados que proporcionen herramientas útiles para el crecimiento
+                        profesional</p>
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <a href="{{=URL('usuario', 'register')}}" class="btn btn-outline-dark mr-3">
+                                <i class="zmdi zmdi-account-add"></i>
+                                Registrarse
+                            </a>
+                            <a href="#contact" class="btn btn-outline-dark">
+                                <i class="zmdi zmdi-pin"></i>
+                                Contáctanos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="{{=URL('static', 'images/welcome.svg')}}" alt="">
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Quote/testimonial aside-->
+<aside class="text-center bg-gradient-primary-to-secondary">
+    <div class="container px-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-xl-8">
+                <div class="h2 fs-1 text-white mb-4">"El pueblo más feliz es el que tenga mejor educados a sus hijos, en
+                    la instrucción del pensamiento y en la dirección de los sentimientos"</div>
+
+                <div class="h2 fs-1 text-white mb-4">José Martí</div>
+
+            </div>
+        </div>
+    </div>
+</aside>
+<!-- App features section-->
+<section id="features">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-8 order-lg-1 mb-5 mb-lg-0">
+                <div class="container-fluid px-5">
+                    <div class="row gx-5">
+                        <div class="col-md-6 mb-5">
+                            <!-- Feature item-->
+                            <div class="text-center">
+                                <i class="bi-phone icon-feature text-gradient d-block mb-3"></i>
+                                <h3 class="font-alt">Maestrías</h3>
+                                <p class="text-muted mb-0">
+                                    Ofrecemos gran variedad de maestrías en diferentes especialidades.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <!-- Feature item-->
+                            <div class="text-center">
+                                <i class="bi-camera icon-feature text-gradient d-block mb-3"></i>
+                                <h3 class="font-alt">Claustro</h3>
+                                <p class="text-muted mb-0">
+                                    Contamos con profesores de alta experiencia con un recorrido de excelencia.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-5 mb-md-0">
+                            <!-- Feature item-->
+                            <div class="text-center">
+                                <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
+                                <h3 class="font-alt">Modalidades</h3>
+                                <p class="text-muted mb-0">
+                                    Nuestra enseñanza consta de varias modalidades como presencial y semi-presencial.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Feature item-->
+                            <div class="text-center">
+                                <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
+                                <h3 class="font-alt">Educación</h3>
+                                <p class="text-muted mb-0">
+                                    Nos auxiliamos de recursos tecnológicos modernos y de las últimas investigaciones
+                                    publicadas para brindarle una educación de calidad.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 order-lg-0">
+                <!-- Features section device mockup-->
+                <div class="features-device-mockup">
+                    <img src="{{=URL('static', 'images/maestrias.svg')}}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Basic features section-->
+<section class="bg-light" id="contact">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
+            <div class="col-12 col-lg-5">
+                <h2 class="display-4 lh-1 mb-4">Contáctenos</h2>
+                <p class="lead fw-normal text-muted mb-5 mb-lg-0">
+                    Nuestra Universidad cuenta con dos sedes, la sede "Manuel Ascunce Domenech" y la "Máximo Gómez Báez"
+                </p>
+
+                <h4 class="mt-4">Sede Manuel Ascunce</h4>
+                <p>
+                    <i class="zmdi zmdi-pin mr-2"></i>
+                    Km 9 1/2 Carretera Morón, Ciego de Ávila, Cuba
+                </p>
+                <p>
+                    <i class="zmdi zmdi-phone mr-2"></i>
+                    (033) 217006
+                </p>
+                <p>
+                    <i class="zmdi zmdi-time mr-2"></i>
+                    Lunes - Sábado, 8:00-17:00
+                </p>
+                
+                <h4 class="mt-4">Sede Máximo Gómez Báez</h4>
+                <p>
+                    <i class="zmdi zmdi-pin mr-2"></i>
+                    Km 9 1/2 Carretera Morón, Ciego de Ávila, Cuba
+                </p>
+                <p>
+                    <i class="zmdi zmdi-phone mr-2"></i>
+                    (033) 227000
+                </p>
+                <p>
+                    <i class="zmdi zmdi-time mr-2"></i>
+                    Lunes - Sábado, 8:00-17:00
+                </p>
+
+            </div>
+            <div class="col-sm-8 col-md-6">
+                <div class="px-5 px-sm-0"><img class="img-fluid rounded-pill"
+                        src="{{=URL('static', 'images/unica_light.jpg')}}" alt="..." width="600px"/></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Call to action section-->
+<section class="cta" style="background-image: url({{=URL('static', 'images/universidad.jpg')}});">
+    <div class="cta-content">
+        <div class="container px-5 text-center">
+            <h3 class="text-white display-1 lh-1 mb-4">
+                Universidad de Ciego de Ávila
+                <br />
+                "Máximo Gómez Báez"
+            </h3>
+            <a class="btn btn-outline-light py-3 px-4 rounded-pill mt-3" style="font-size: 1.5rem;" href="https://intranet.unica.cu/"
+                target="_blank">
+                Visítenos
+            </a>
+        </div>
+    </div>
+</section>
+
+{{block page_js}}
+<script src="{{=URL('static/frontlayout', 'js/scripts.js')}}"></script>
+{{end page_js}}

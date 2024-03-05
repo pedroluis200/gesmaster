@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{=app_description}}">
+    <meta name="author" content="{{=app_author}}">
+    <meta name="keywords" content="{{=app_keywords}}">
+
+    <!-- Title Page-->
+    <title>{{=app_title}}</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{{=URL('static/layout', 'css/font-face.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet"
+        media="all">
+    <link href="{{=URL('static/layout', 'vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet"
+        media="all">
+    <link href="{{=URL('static/layout', 'vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet"
+        media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{{=URL('static/layout', 'vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{{=URL('static/layout', 'vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}"
+        rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/wow/animate.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/slick/slick.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet"
+        media="all">
+
+    <!-- Main CSS-->
+    <link href="{{=URL('static/layout', 'css/theme.css')}}" rel="stylesheet" media="all">
+
+    <!-- Custom CSS-->
+    <link href="{{=URL('static', 'css/layout.css')}}" rel="stylesheet" media="all">
+
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{{=app_icon}}" type="image/x-icon">
+
+    <!-- Include-->
+    {{include 'web2py_ajax.html'}}
+    <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+    {{block head}}{{end}}
+
+    <style>
+        .header__navbar ul li a {
+            color: #353535;
+        }
+
+        .header__logo{
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop4 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header4-wrap">
+                    <div class="header__logo" onclick="go_home()">
+                        <div class="row justify-content-center pl-4">
+                            <img src="{{=URL('static', 'images/logo.png')}}" width="50" height="50" alt="GesMaster" />
+                            <p style="font-size: 24px;color: #353535;margin-left: 5px;padding-top: 4px;">
+                                <b>Ges</b>Master
+                            </p>
+                        </div>
+                    </div>
+                    <div class="header__tool">
+                        <div class="account-wrap">
+                            <div class="clearfix js-item-menu">
+                                <div class="content">
+                                    <a href="#" onclick="redirect()"
+                                        style="color: #333;font-size: 16px;font-weight: 500;">
+                                        <i class="fa fa-star mr-1"></i>
+                                        Ediciones
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-wrap">
+                            <div class="account-item account-item--style2 clearfix js-item-menu">
+                                <div class="content" style="margin-left: 15px!important;">
+                                    <a class="js-acc-btn" href="#">
+                                        <i class="fa fa-user mr-1"></i>
+                                        Acceder
+                                    </a>
+                                </div>
+                                <div class="account-dropdown js-dropdown">
+                                    <div class="account-dropdown__body">
+                                        <div class="account-dropdown__item">
+                                            <a href="{{=URL('usuario', 'login')}}">
+                                                <i class="zmdi zmdi-key"></i>Iniciar sesión</a>
+                                        </div>
+                                        <div class="account-dropdown__item">
+                                            <a href="{{=URL('usuario', 'register')}}">
+                                                <i class="zmdi zmdi-account-add"></i>Registrarse</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- END HEADER DESKTOP-->
+
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile header-mobile-2 d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner" onclick="go_home()">
+                        <a class="logo" href="{{=URL('default', 'index')}}">
+                            <p style="font-size: 24px;color: whitesmoke;margin-left: 5px;padding-top: 4px;">
+                                <b>Ges</b>Master
+                            </p>
+                        </a>
+                        <div class="d-block d-lg-none">
+                            <div class="header__tool">
+                                <div class="account-wrap">
+                                    <div class="account-item--style2 clearfix js-item-menu">
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#" onclick="redirect()">
+                                                <i class="fa fa-star mr-1"></i>
+                                                Ediciones
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="account-wrap">
+                                    <div class="account-item account-item--style2 clearfix js-item-menu">
+                                        <div class="content" style="margin-left: 15px!important;">
+                                            <a class="js-acc-btn" href="#">
+                                                <i class="fa fa-user mr-1"></i>
+                                                Acceder
+                                            </a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{=URL('usuario', 'login')}}">
+                                                        <i class="zmdi zmdi-key"></i>Iniciar sesión</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{=URL('usuario', 'register')}}">
+                                                        <i class="zmdi zmdi-account-add"></i>Registrarse</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- END HEADER MOBILE -->
+
+        <!-- PAGE CONTENT-->
+        <div id="page-top">
+            <!-- WELCOME-->
+            {{include}}
+            <!-- END WELCOME-->
+
+        </div>
+
+    </div>
+
+    <!-- Footer-->
+    <footer class="bg-black text-center py-5">
+        <div class="container px-5">
+            <div class="text-white-50 small">
+                <div class="mb-2">&copy; Copyright 2022 Facultad de Informática y Ciencias Exactas</div>
+            </div>
+        </div>
+    </footer>
+
+    {{=plugin_toastr_message()}}
+    <div id="plugin-toastr-message"></div>
+
+    <!-- Jquery JS-->
+    <script src="{{=URL('static/layout', 'vendor/jquery-3.6.0.min.js')}}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{{=URL('static/layout', 'vendor/bootstrap-4.1/popper.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
+    <!-- Vendor JS       -->
+    <script src="{{=URL('static/layout', 'vendor/slick/slick.min.js')}}">
+    </script>
+    <script src="{{=URL('static/layout', 'vendor/wow/wow.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/animsition/animsition.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
+    </script>
+    <script src="{{=URL('static/layout', 'vendor/counter-up/jquery.waypoints.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/counter-up/jquery.counterup.min.js')}}">
+    </script>
+    <script src="{{=URL('static/layout', 'vendor/circle-progress/circle-progress.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+
+    </script>
+
+    <!-- Main JS-->
+    <script src="{{=URL('static/layout', 'js/main.js')}}"></script>
+
+    <script>
+        function go_home() {
+            location.href = "{{=URL('default', 'index')}}";
+        }
+        function redirect() {
+            location.href = "{{=URL('default', 'ediciones')}}";
+        }
+    </script>
+
+    {{block page_js}}
+    {{end page_js}}
+
+</body>
+
+</html>
+<!-- end document-->

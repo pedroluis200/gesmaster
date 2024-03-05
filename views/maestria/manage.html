@@ -1,0 +1,60 @@
+{{extend 'layout_admin.html'}}
+
+<div class="sufee-alert alert with-close alert-warning alert-dismissible fade show">
+    <span class="badge badge-pill badge-warning">Información</span>
+    Si elimina una maestría, se eliminaran todos los usuarios coordinadores y las ediciones asociadas a esta.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+<a href="{{=URL('crear')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-plus"></i> </span>
+    Crear maestría
+</a>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gestionar maestrías</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cantidad de ediciones</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for maestria in maestrias:}}
+                            <tr>
+                                <td>{{=maestria.nombre}}</td>
+                                <td>{{=maestria.ediciones}}</td>
+                                <td>
+                                    <a href="{{=URL('editar', args=maestria.id)}}"
+                                        class="btn btn-success btn-rounded text-white mb-2">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" onclick="delete_elem(`{{=URL('eliminar', args=maestria.id)}}`)"
+                                        class="btn btn-danger btn-rounded text-white mb-2">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cantidad de ediciones</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

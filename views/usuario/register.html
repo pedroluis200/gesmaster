@@ -1,0 +1,112 @@
+{{ extend 'layout_login.html' }}
+
+{{block head}}
+<style>
+.btn-close{
+    position: absolute;
+    z-index: 9999;
+    top: -3;
+    right: 0;
+}
+</style>
+{{end}}
+
+<div class="row">
+    <div class="btn-close">
+        <a href="{{=URL('default', 'index')}}" class="btn">
+            <i class="fas fa-times"></i>
+        </a>
+    </div>
+    <div class="col-lg-12">
+        <div class="p-5">
+            <a href="{{=URL("default", "index" )}}">
+                <div class="row justify-content-center">
+                    <img src="{{=URL("static", "images/logo.png" )}}" width="50" height="50" alt="GesMaster" />
+                    <p style="font-size: 24px;color: #353535;margin-left: 5px;padding-top: 4px;">
+                        <b>Ges</b>Master
+                    </p>
+                </div>
+            </a>
+
+            <h4 class="text-dark text-center">Registrarse en el sistema</h4>
+
+            <div>
+                {{if form.errors.credenciales:}}
+                   <p class="text-danger text-center">{{=form.errors.credenciales}}</p>
+                {{pass}}
+            </div>
+            
+            <div class="pt-4">
+                {{=form.custom.begin}}
+                   <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="custom-label" for="first_name">
+                            Nombre
+                        </label>
+                        {{=form.custom.widget.first_name}}
+                        {{if form.errors.first_name:}}
+                            <p class="text-danger">{{=form.errors.first_name}}</p>
+                        {{pass}}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="custom-label" for="last_name">
+                            Apellidos
+                        </label>
+                        {{=form.custom.widget.last_name}}
+                            {{if form.errors.last_name:}}
+                            <p class="text-danger">{{=form.errors.last_name}}</p>
+                        {{pass}}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="custom-label" for="email">
+                            Correo electrónico
+                        </label>
+                        {{=form.custom.widget.email}}
+                            {{if form.errors.email:}}
+                            <p class="text-danger">{{=form.errors.email}}</p>
+                        {{pass}}
+                    </div>                    
+                    <div class="col-md-6 form-group">
+                        <label class="custom-label" for="inputUser">
+                            Usuario
+                        </label>
+                        {{=form.custom.widget.username}}
+                        {{if form.errors.username:}}
+                            <p class="text-danger">{{=form.errors.username}}</p>
+                        {{pass}}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="custom-label" for="inputPassword">
+                            Contraseña
+                        </label>
+                        {{=form.custom.widget.password}}
+                            {{if form.errors.password:}}
+                            <p class="text-danger">{{=form.errors.password}}</p>
+                        {{pass}}
+                    </div>                    
+                    <div class="col-md-6 form-group">
+                        <label class="custom-label" for="repeat">
+                            Repetir contraseña
+                        </label>
+                        {{=form.custom.widget.repeat}}
+                        {{if form.errors.repeat:}}
+                            <p class="text-danger">{{=form.errors.repeat}}</p>
+                        {{pass}}
+                    </div>
+                   </div>
+
+                    <div class="pt-3">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                            <i class="fas fa-unlock-alt pr-2"></i> Registrarse
+                        </button>
+                    </div>
+                {{=form.custom.end}}
+            </div>
+
+            <hr>
+            <div class="text-center">
+                <a class="small" href="{{=URL('usuario', 'login')}}">Tiene una cuenta. Inicie sesión!</a>
+            </div>
+        </div>
+    </div>
+</div>

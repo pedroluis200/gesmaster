@@ -1,0 +1,329 @@
+{{include '_includes/verificar_edicion.html'}}
+{{include '_includes/verificar_mantenimiento.html'}}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{{=app_description}}">
+    <meta name="author" content="{{=app_author}}">
+    <meta name="keywords" content="{{=app_keywords}}">
+
+    <!-- Title Page-->
+    <title>{{=app_title}}</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{{=URL('static/layout', 'css/font-face.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet"
+        media="all">
+    <link href="{{=URL('static/layout', 'vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet"
+        media="all">
+    <link href="{{=URL('static/layout', 'vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet"
+        media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{{=URL('static/layout', 'vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{{=URL('static/layout', 'vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}"
+        rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/wow/animate.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/slick/slick.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet"
+        media="all">
+
+    <!-- Main CSS-->
+    <link href="{{=URL('static/layout', 'css/theme.css')}}" rel="stylesheet" media="all">
+    <link href="{{=URL('static/layout', 'css/jquery-ui.min.css')}}" rel="stylesheet" media="all">
+
+    <!-- Custom CSS-->
+    <link href="{{=URL('static', 'css/layout.css')}}" rel="stylesheet" media="all">
+
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{{=app_icon}}" type="image/x-icon">
+
+    <!-- Include-->
+    {{include 'web2py_ajax.html'}}
+    <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+    {{block head}}{{end}}
+
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar2">
+            <div class="logo">
+                <div class="row justify-content-center pl-4">
+                    <img src="{{=URL('static', 'images/logo.png')}}" width="50" height="50" alt="GesMaster" />
+                    <p style="font-size: 24px;color: #353535;margin-left: 5px;padding-top: 4px;">
+                        <b>Ges</b>Master
+                    </p>
+                </div>
+            </div>
+            <div class="menu-sidebar2__content js-scrollbar1">
+                <nav class="navbar-sidebar2">
+                    {{if auth.has_membership('Coordinador'):}}
+                    <h5 class="pt-3 pl-4">
+                        Maestría: {{=db.auth_user(auth.user.id).maestria_usuario.id_maestria.nombre}}
+                    </h5>
+                    {{if edicion_activa_sistema:}}
+                    <h5 class="pt-2 pl-4">
+                        Edición: {{=edicion_activa_sistema.numero}}
+                    </h5>
+                    {{else:}}
+                    <h5 class="pt-2 pl-4 error">
+                        No hay ediciones creadas
+                    </h5>
+                    {{pass}}
+
+                    {{pass}}
+
+                    {{if mantenimiento:}}
+                    <h5 class="pt-2 pl-4 text-success">
+                        Sistema en mantenimiento
+                    </h5>
+                    {{pass}}
+
+                    <ul class="list-unstyled navbar__list">
+                        <!-- init for menu -->
+                        {{for _item in response.menu:}}
+                        {{if _item[0] == 'Label':}}
+                        <li class="nav-label">{{=_item[1]}}</li>
+                        {{elif len(_item) < 5:}} <li class="{{= 'active' if _item[1] else ''}}">
+                            <a href="{{=_item[3]}}">
+                                <i class="fas fa-{{=_item[2]}}"></i>
+                                {{=_item[0]}}
+                            </a>
+                            </li>
+                            {{else:}}
+                            <li class="has-sub {{= 'active' if _item[1] else ''}}">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-{{=_item[2]}}"></i>{{=_item[0]}}
+                                    <span class="arrow">
+                                        <i class="fas fa-angle-down"></i>
+                                    </span>
+                                </a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                    {{for _subitem in _item[4]:}}
+                                    <li>
+                                        <a href="{{=_subitem[3]}}">
+                                            <i class="fas fa-{{=_subitem[2]}}"></i>
+                                            {{=_subitem[0]}}
+                                        </a>
+                                    </li>
+                                    {{pass}}
+                                </ul>
+                            </li>
+                            {{pass}}
+                            {{pass}}
+                            <!-- end for -->
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container2">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop2">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap2">
+                            <div class="logo d-block d-lg-none">
+                                <div class="row justify-content-center pl-4">
+                                    <img src="{{=URL('static', 'images/logo.png')}}" width="50" height="50"
+                                        alt="GesMaster" />
+                                    <p style="font-size: 24px;color: #353535;margin-left: 5px;padding-top: 4px;">
+                                        <b>Ges</b>Master
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="header-button2">
+                                {{=LOAD('dashboard', 'notificaciones.load', content=IMG(_src=URL('static/images',
+                                'load.gif')))}}
+                                <div class="header-button-item mr-0 js-sidebar-btn">
+                                    <i class="zmdi zmdi-menu"></i>
+                                </div>
+                                <div class="setting-menu js-right-sidebar d-none d-lg-block">
+                                    <div>
+                                        <h5 class="pt-4 pl-4 text-success">{{=auth.user.username}}</h4>
+                                            <h4 class="pt-2 pl-4">{{=app_rol}}</h4>
+                                    </div>
+                                    <div class="account-dropdown__body">
+                                        <div class="account-dropdown__item">
+                                            <a href="{{=URL('usuario', 'perfil')}}">
+                                                <i class="zmdi zmdi-account"></i>Perfil de usuario</a>
+                                        </div>
+                                        {{if auth.has_membership('Coordinador'):}}
+                                        <div class="account-dropdown__item">
+                                            <a href="{{=URL('settings', 'coordinador_configuracion')}}">
+                                                <i class="zmdi zmdi-settings"></i>Configuración</a>
+                                        </div>
+                                        {{pass}}
+                                        <div class="account-dropdown__item">
+                                            <a href="{{=URL('usuario', 'logout')}}">
+                                                <i class="zmdi zmdi-power"></i>{{=T('Cerrar sesión')}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
+                <div class="menu-sidebar2__content js-scrollbar2">
+                    <div class="account2" style="padding-bottom: 10px!important;">
+                        <span class="display-5"><i class="fa fa-user text-primary"></i></span>
+                        <h4 class="name mt-0">
+                            <a href="{{=URL('usuario', 'perfil')}}">
+                                Configurar perfil
+                            </a>
+                        </h4>
+                        <a class="text-danger" href="{{=URL('usuario', 'logout')}}">{{=T('Cerrar sesión')}}</a>
+                    </div>
+                    <nav class="navbar-sidebar2">
+                        <div class="text-center">
+                            <h5 class="pt-2 pb-2 text-success">{{=auth.user.username}}</h4>
+                                <h4>{{=app_rol}}</h4>
+                                {{if auth.has_membership('Coordinador'):}}
+                                <h5 class="pt-3">
+                                    Maestría: {{=db.auth_user(auth.user.id).maestria_usuario.id_maestria.nombre}}
+                                </h5>
+                                {{if edicion_activa_sistema:}}
+                                <h5 class="pt-2">
+                                    Edición: {{=edicion_activa_sistema.numero}}
+                                </h5>
+                                {{else:}}
+                                <h5 class="pt-2 error">
+                                    No hay ediciones creadas
+                                </h5>
+                                {{pass}}
+
+                                {{pass}}
+
+                                {{if mantenimiento:}}
+                                <h5 class="pt-2 text-success">
+                                    Sistema en mantenimiento
+                                </h5>
+                                {{pass}}
+                        </div>
+
+                        <ul class="list-unstyled navbar__list">
+                            <!-- init for menu -->
+                            {{for _item in response.menu:}}
+                            {{if _item[0] == 'Label':}}
+                            <li class="nav-label {{= 'active' if _item[1] else ''}}">{{=_item[1]}}</li>
+                            {{elif len(_item) < 5:}} <li>
+                                <a href="{{=_item[3]}}">
+                                    <i class="fas fa-{{=_item[2]}}"></i>
+                                    {{=_item[0]}}
+                                </a>
+                                </li>
+                                {{else:}}
+                                <li class="has-sub {{= 'active' if _item[1] else ''}}">
+                                    <a class="js-arrow" href="#">
+                                        <i class="fas fa-{{=_item[2]}}"></i>{{=_item[0]}}
+                                        <span class="arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                        {{for _subitem in _item[4]:}}
+                                        <li>
+                                            <a href="{{=_subitem[3]}}">
+                                                <i class="fas fa-{{=_subitem[2]}}"></i>
+                                                {{=_subitem[0]}}
+                                            </a>
+                                        </li>
+                                        {{pass}}
+                                    </ul>
+                                </li>
+                                {{pass}}
+                                {{pass}}
+                                <!-- end for -->
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        {{# Esta variable edicion_activa_sistema está incluida en el archivo importado al inicio}}
+                        {{if auth.has_membership('Coordinador') and not edicion_activa_sistema:}}
+                        <div class="alert alert-warning col-8" role="alert">
+                            Alerta!! Antes de continuar debe crear una Edición de la maestría
+                        </div>
+                        {{pass}}
+
+                        {{include}}
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2022 Facultad de Informática y Ciencias Exactas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    {{=plugin_toastr_message()}}
+    <div id="plugin-toastr-message"></div>
+
+    <!-- Jquery JS-->
+    <script src="{{=URL('static/layout', 'vendor/jquery.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/jquery-ui.js')}}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{{=URL('static/layout', 'vendor/bootstrap-4.1/popper.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
+    <!-- Vendor JS       -->
+    <script src="{{=URL('static/layout', 'vendor/slick/slick.min.js')}}">
+    </script>
+    <script src="{{=URL('static/layout', 'vendor/wow/wow.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/animsition/animsition.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
+    </script>
+    <script src="{{=URL('static/layout', 'vendor/counter-up/jquery.waypoints.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/counter-up/jquery.counterup.min.js')}}">
+    </script>
+    <script src="{{=URL('static/layout', 'vendor/circle-progress/circle-progress.min.js')}}"></script>
+    <script src="{{=URL('static/layout', 'vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
+
+    </script>
+
+    <!-- Main JS-->
+    <script src="{{=URL('static/layout', 'js/main.js')}}"></script>
+
+    {{block datatable}}
+    {{include '_includes/datatable/imports.html'}}
+    {{include '_includes/sweetalert/delete.html'}}
+    {{include '_includes/datatable/init.html'}}
+    {{end datatable}}
+
+    {{block page_js}}
+    {{end page_js}}
+
+</body>
+
+</html>
+<!-- end document-->

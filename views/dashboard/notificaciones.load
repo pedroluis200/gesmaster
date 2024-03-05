@@ -1,0 +1,40 @@
+<div class="header-button-item {{= 'has-noti' if list_notify else ''}} js-item-menu mr-4">
+    <i class="zmdi zmdi-notifications"></i>
+    <div class="notifi-dropdown js-dropdown">
+        <div class="notifi__title">
+            {{if list_notify: }}
+            <p>Tienes nuevas notificaciones</p>
+            {{else:}}
+            <p class="text-center">No tienes nuevas notificaciones</p>
+            {{pass}}
+        </div>
+        <div class="notifi-body" style="max-height: 230px!important;overflow-y: auto;">
+            {{if list_notify:}}
+            {{for n in list_notify:}}
+            <div>
+                <a class="notifi__item" href="{{=URL('notificacion', 'detalles', args=n.id, extension='html')}}">
+                    <div class="bg-{{=n.tipo}} img-cir img-40">
+                        {{if n.tipo == 'info':}}
+                        <i class="zmdi zmdi-info-outline"></i>
+                        {{elif n.tipo == 'success':}}
+                        <i class="zmdi zmdi-check"></i>
+                        {{elif n.tipo == 'warning':}}
+                        <i class="zmdi zmdi-alert-polygon"></i>
+                        {{else:}}
+                        <i class="zmdi zmdi-alert-circle-o"></i>
+                        {{pass}}
+                    </div>
+                    <div class="content">
+                        <p>{{=n.titulo}}</p>
+                        <span class="date">{{=n.fecha}}</span>
+                    </div>
+                </a>
+            </div>
+            {{pass}}
+            {{pass}}
+        </div>
+        <div class="notifi__footer">
+            <a href="{{=URL('notificacion', 'manage', extension='html')}}">Administrar notificaciones</a>
+        </div>
+    </div>
+</div>

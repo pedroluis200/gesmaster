@@ -1,0 +1,76 @@
+{{extend 'layout_admin.html'}}
+
+<div class="row">
+    <div class="col-12">
+        {{if auth.has_membership('Coordinador'):}}
+
+        <a href="{{=URL('temas_aprobados')}}" class="btn mb-3 btn-rounded btn-success">
+            <span><i class="fas fa-check-square mr-2"></i> </span>
+            Temas aprobados
+        </a>
+
+        <a href="{{=URL('temas_pendientes')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-clock-o mr-2"></i> </span>
+            Temas pendientes
+        </a>
+
+        <a href="{{=URL('modificar_estado', args=tesis.id)}}" class="btn btn-primary btn-rounded text-white mb-3">
+            <i class="fas fa-edit"></i>
+            Modificar estado
+        </a>
+
+        {{if not tesis.tutor:}}
+        <a href="{{=URL('asignar_tutor', args=tesis.id)}}" class="btn btn-success btn-rounded text-white mb-3">
+            <i class="fas fa-plus"></i>
+            Asignar tutor
+        </a>
+        {{else:}}
+        <a href="{{=URL('asignar_tutor', args=tesis.id)}}" class="btn btn-info btn-rounded text-white mb-3">
+            <i class="fas fa-refresh"></i>
+            Cambiar tutor
+        </a>
+        <a href="{{=URL('dictamen', 'generar_dictamen_tesis', args=tesis.id)}}"
+            class="btn btn-dark btn-rounded text-white mb-3">
+            <i class="fas fa-print"></i>
+            Generar dictamen
+        </a>
+        {{pass}}
+
+        {{else:}}
+        <a href="{{=URL('tutoria')}}" class="btn btn-info btn-rounded text-white mb-3">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        {{pass}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Detalles del tema de tesis</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block text-center">
+                    <a href="{{=URL('default', 'download' , args=tesis.documento)}}" target="_blank"
+                        class="btn btn-success rounded mb-3">
+                        <i class="fas fa-download" style="font-size: 35px;margin: 5px;"> </i>
+                    </a>
+                    <h5 class="text-sm-center mt-2 mb-1">{{=tesis.titulo}}</h5>
+                    <div class="text-sm-center mb-1">
+                        <h5>
+                            {{=tesis.id_admision.nombre + ' ' + tesis.id_admision.apellido1 }}
+                        </h5>
+                    </div>
+                    <div class="location text-sm-center">
+                        {{=tesis.estado}}
+                    </div>
+                </div>
+                <hr>
+                <div class="card-text text-sm-center">
+                    {{tutor= tesis.tutor.first_name + ' ' + tesis.tutor.last_name if tesis.tutor else 'No asignado'}}
+                    Tutor: {{=tutor}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

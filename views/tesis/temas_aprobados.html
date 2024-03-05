@@ -1,0 +1,94 @@
+{{extend 'layout_admin.html'}}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Gestionar temas de tesis aprobados</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI</th>
+                                <th>Usuario</th>
+                                <th>Tutor</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for row in aprobados:}}
+                            <tr>
+                                <td>{{=row.tesis.titulo}}</td>
+                                <td>{{=row.admision.nombre}}</td>
+                                <td>{{=row.admision.apellido1 +' '+ row.admision.apellido2}}</td>
+                                <td>{{=row.admision.ci}}</td>
+                                <td>
+                                    <a href="{{=URL('usuario', 'detalles', args=row.admision.id_user)}}">
+                                        {{=row.admision.id_user.username}}
+                                    </a>
+                                </td>
+                                {{if row.tesis.tutor:}}
+                                <td>{{=row.tesis.tutor.first_name + ' ' + row.tesis.tutor.last_name}}</td>
+                                {{else:}}
+                                <td>{{='No asignado'}}</td>
+                                {{pass}}
+                                <td>
+                                    <a href="{{=URL('modificar_estado', args=row.tesis.id)}}"
+                                        class="btn btn-primary btn-rounded text-white mb-2">
+                                        <i class="fas fa-edit"></i>
+                                        Modificar estado
+                                    </a>
+                                    {{if not row.tesis.tutor:}}
+                                    <a href="{{=URL('asignar_tutor', args=row.tesis.id)}}"
+                                        class="btn btn-success btn-rounded text-white mb-2">
+                                        <i class="fas fa-plus"></i>
+                                        Asignar tutor
+                                    </a>
+                                    {{else:}}
+                                    <a href="{{=URL('asignar_tutor', args=row.tesis.id)}}"
+                                        class="btn btn-info btn-rounded text-white mb-2">
+                                        <i class="fas fa-refresh"></i>
+                                        Cambiar tutor
+                                    </a>
+                                    <a href="{{=URL('dictamen', 'generar_dictamen_tesis', args=row.tesis.id)}}"
+                                        class="btn btn-dark btn-rounded text-white mb-2">
+                                        <i class="fas fa-print"></i>
+                                        Generar dictamen
+                                    </a>
+                                    {{pass}}
+                                </td>
+                                <td>
+                                    <a href="{{=URL('detalles', args=row.tesis.id)}}"
+                                        class="btn btn-info btn-rounded text-white mb-2">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#" onclick="delete_elem(`{{=URL('eliminar', args=row.tesis.id)}}`)"
+                                        class="btn btn-danger btn-rounded text-white mb-2">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Título</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI</th>
+                                <th>Usuario</th>
+                                <th>Tutor</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

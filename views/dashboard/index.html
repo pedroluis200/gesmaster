@@ -1,0 +1,11 @@
+{{extend 'layout_admin.html'}}
+
+{{if auth.has_membership('Administrador'):}}
+{{=LOAD('dashboard', 'administrador.load', content=IMG(_src=URL('static/images', 'load.gif')))}}
+{{elif auth.has_membership('Coordinador'):}}
+{{=LOAD('dashboard', 'coordinador.load', content=IMG(_src=URL('static/images', 'load.gif')))}}
+{{elif auth.has_membership('Estudiante'):}}
+{{=LOAD('dashboard', 'estudiante.load', content=IMG(_src=URL('static/images', 'load.gif')))}}
+{{else:}}
+{{=LOAD('dashboard', 'profesor.load', content=IMG(_src=URL('static/images', 'load.gif')))}}
+{{pass}}

@@ -1,0 +1,41 @@
+<script type="module">
+    const { createApp } = Vue
+
+    createApp({
+        async mounted() {
+            await this.get_actividades();
+        },
+        data() {
+            return {
+                actividades: [],
+                selected: 0,
+                select_actividades: []
+            }
+        },
+        methods: {
+            async get_actividades() {
+                const self = this;
+                await axios.get(url_get_data)
+                    .then(function (response) {
+                        self.actividades = [...response.data.actividades]
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                    });
+            },
+            add_actividad() {
+                this.select_actividades.push(this.actividades[this.selected]);
+                this.actividades.splice(this.selected, 1);
+                this.selected = "0";
+            },
+            remove_act(index) {
+                this.actividades.push(this.select_actividades[index]);
+                this.select_actividades.splice(index, 1);
+            },
+        },
+        compilerOptions: {
+            delimiters: ["[[", "]]"],
+            isCustomElement: (tag) => ['o:p'].includes(tag),
+        }
+    }).mount('#dictamen')
+</script>

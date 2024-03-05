@@ -1,0 +1,25 @@
+{{extend 'layout_admin.html'}}
+
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Asignar</strong> tutor
+            </div>
+            <div class="card-body card-block">
+                {{=form.custom.begin}}
+
+                {{=form.custom.label.tutor}}
+                <span class="text-danger">*</span>
+                <div class="form-group ">
+                    {{=form.custom.widget.tutor}}
+                </div>
+
+
+                {{=form.custom.submit}}
+                {{=form.custom.end}}
+            </div>
+        </div>
+    </div>
+</div>

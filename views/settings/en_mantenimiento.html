@@ -1,0 +1,23 @@
+{{ extend 'layout_login.html' }}
+
+<div class="card mb-0">
+    <div class="card-body pt-5">
+        <div class="d-flex align-items-center flex-wrap justify-content-center pd-20">
+            <div class="pd-10">
+                <div class="text-center">
+                    <p style="font-size: 4rem;">
+                        <i class="fa fa-info-circle"></i>
+                    </p>
+                    <h4 class="mb-4">
+                        El sistema se encuentra en mantenimiento. Inténtelo más tarde.
+                    </h4>
+                    <div class="mt-5 pt-20 mx-auto" style="max-width: max-content;">
+                        <a href="{{=URL('default', 'index')}}"
+                            class="btn btn-success btn-block btn-lg">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

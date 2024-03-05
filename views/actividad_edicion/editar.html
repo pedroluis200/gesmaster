@@ -1,0 +1,30 @@
+{{extend 'layout_admin.html'}}
+
+<a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-arrow-left"></i> </span>
+</a>
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Editar</strong> actividad
+            </div>
+            <div class="card-body card-block">
+                {{=form}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+
+{{include '_includes/datepicker/datepicker.html'}}
+
+<script>
+    $(function () {
+        $("#actividad_edicion_fecha_inicio").datepicker(settings_datepicker);
+        $("#actividad_edicion_fecha_fin").datepicker(settings_datepicker);
+    });
+</script>
+{{end page_js}}

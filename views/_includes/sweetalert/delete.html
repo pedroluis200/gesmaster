@@ -1,0 +1,24 @@
+<link href="{{=URL('static/layout', 'vendor/sweetalert/css/sweetalert.css')}}" rel="stylesheet">
+<script src="{{=URL('static/layout', 'vendor/sweetalert/js/sweetalert.min.js')}}"></script>
+
+<script>
+    function delete_elem(url) {
+        swal(
+            {
+                title: '¿Estás seguro?',
+                text: 'Eliminar este elemento es una operación irreversible!!',
+                type: 'warning',
+                showCancelButton: !0,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar',
+            },
+            function (e) {
+                e
+                    ? location.href = url
+                    : '';
+            }
+        );
+
+    }
+</script>

@@ -1,0 +1,71 @@
+{{extend 'layout_admin.html'}}
+
+<div class="sufee-alert alert with-close alert-warning alert-dismissible fade show">
+    Solo se muestran los temas de tesis que tengan un tutor asignado
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title mb-4">Dictamen de aceptación de tema de investigación</h3>
+                <h4 class="card-title">Seleccione el tema de investigación</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI</th>
+                                <th>Usuario</th>
+                                <th>Tutor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for row in temas:}}
+                            <tr>
+                                <td>{{=row.tesis.titulo}}</td>
+                                <td>{{=row.admision.nombre}}</td>
+                                <td>{{=row.admision.apellido1 +' '+ row.admision.apellido2}}</td>
+                                <td>{{=row.admision.ci}}</td>
+                                <td>
+                                    <a href="{{=URL('usuario', 'detalles', args=row.admision.id_user)}}">
+                                        {{=row.admision.id_user.username}}
+                                    </a>
+                                </td>
+                                {{if row.tesis.tutor:}}
+                                <td>{{=row.tesis.tutor.first_name + ' ' + row.tesis.tutor.last_name}}</td>
+                                {{else:}}
+                                <td>{{='No asignado'}}</td>
+                                {{pass}}
+                                <td>
+                                    <a href="{{=URL('generar_dictamen_tesis', args=row.tesis.id)}}"
+                                        class="btn btn-dark btn-rounded text-white mb-2">
+                                        <i class="fas fa-print"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Título</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>CI</th>
+                                <th>Usuario</th>
+                                <th>Tutor</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

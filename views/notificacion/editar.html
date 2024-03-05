@@ -1,0 +1,48 @@
+{{extend 'layout_admin.html'}}
+
+{{if edicion_actual:}}
+<a href="{{=URL('edicion', 'manage')}}" class="btn mb-3 btn-rounded btn-info">
+    <span><i class="fa fa-arrow-left"></i> </span>
+</a>
+{{pass}}
+
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="card">
+            <div class="card-header row">
+                <div class="col-sm-6">
+                    <strong>Editar</strong> edición
+                </div>
+                {{if edicion_actual.numero != registro.numero:}}
+                <div class="col-sm-6 text-right">
+                    <a href="{{=URL('activar_edicion', args=registro.id)}}"
+                        class="btn btn-success btn-rounded text-white">
+                        <span><i class="fa fa-star"></i> </span>
+                        Activar
+                    </a>
+                </div>
+                {{pass}}
+
+            </div>
+            <div class="card-body card-block">
+                {{if edicion_actual:}}
+                <h4 class="mb-4">Edición actual: {{=edicion_actual.numero}}</h4>
+                {{pass}}
+
+                {{=form}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+
+{{include '_includes/datepicker/datepicker.html'}}
+
+<script>
+    $(function () {
+        $("#edicion_fecha_inicio").datepicker(settings_datepicker);
+        $("#edicion_fecha_fin").datepicker(settings_datepicker);
+    });
+</script>
+{{end page_js}}

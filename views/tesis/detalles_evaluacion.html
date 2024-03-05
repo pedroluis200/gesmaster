@@ -1,0 +1,48 @@
+{{extend 'layout_admin.html'}}
+
+{{if not tesis:}}
+<div class="row">
+    <div class="col-md-8">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading mb-3">
+                <span class="fa fa-info-circle mr-2"></span> No ha enviado su tema de tesis!!
+            </h4>
+            <p>Es necesario que envíe el tema de su evaluación para su revisión por parte del comité académico de la
+                maestría.
+            </p>
+            <hr>
+            <a href="{{=URL('tesis', 'enviar_evaluacion')}}" class="btn btn-info">
+                <span class="fa fa-file-text mr-2"></span>
+                Enviar tema de tesis
+            </a>
+        </div>
+    </div>
+</div>
+{{else:}}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Detalles del tema de tesis</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block text-center">
+                    <a href="{{=URL('default', 'download' , args=tesis.documento)}}" target="_blank"
+                        class="btn btn-success rounded mb-3">
+                        <i class="fas fa-download" style="font-size: 35px;margin: 5px;"> </i>
+                    </a>
+                    <h5 class="text-sm-center mt-2 mb-1">{{=tesis.titulo}}</h5>
+                    <div class="location text-sm-center">
+                        {{=tesis.estado}}
+                    </div>
+                </div>
+                <hr>
+                <div class="card-text text-sm-center">
+                    {{tutor= tesis.tutor.first_name + ' ' + tesis.tutor.last_name if tesis.tutor else 'No asignado'}}
+                    Tutor: {{=tutor}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{pass}}

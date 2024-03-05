@@ -1,0 +1,700 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    /* Font Definitions */
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 1;
+        mso-generic-font-family: roman;
+        mso-font-format: other;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 0 0 0 0 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    span.SpellE {
+        mso-style-name: "";
+        mso-spl-e: yes;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+        mso-header-margin: .5in;
+        mso-footer-margin: .5in;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    /* Style Definitions */
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    table.TableGrid {
+        mso-style-name: TableGrid;
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-unhide: no;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 0in 0in 0in;
+        mso-para-margin: 0in;
+        mso-para-margin-bottom: .0001pt;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <a href="{{=URL('dictamen_suficiencia')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-05.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-05 sin datos
+        </a>
+    </div>
+</div>
+
+<div id="dictamen">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">Añadir actividad</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <select name="actividades" id="actividades" v-model="selected" class="form-control">
+                                    <option v-for="(item, index) in actividades" :key="item.id" :value="index">
+                                        [[item.actividad]] - [[item.tipo]]
+                                    </option>
+                                </select>
+    
+                                <button class="btn btn-success mt-2" @click="add_actividad">
+                                    <i class="fas fa-plus"></i>
+                                    Añadir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">Actividades seleccionadas</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div v-if="!select_actividades.length">
+                                <p class="text-info">No se han añadido actividades</p>
+                            </div>
+    
+                            <div class="table-responsive" v-else>
+                                <table class="table table-striped table-bordered dataTable dtr-inline">
+                                    <thead>
+                                        <th>Nombre</th>
+                                        <th>Créditos</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(item, index) in select_actividades" :key="item.id">
+                                            <td>[[ item.actividad ]]</td>
+                                            <td>[[ item.creditos ]]</td>
+                                            <td>
+                                                <button @click="remove_act(index)">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title mb-3">Dictamen sobre evaluaciones de suficiencia - Modelo PG 05</strong>
+                </div>
+    
+                <div class="card-body table-responsive">
+                    <div id="exportContent" contentEditable="true" class="mt-2 row" style="margin: auto;max-width: 600px;">
+                        <div class=WordSection1>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:4.75pt;margin-bottom:
+                            .55pt;margin-left:2.0pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>PG-05 </span></b><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                            margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                    <o:p>&nbsp;</o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                            margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>CENTRO:
+                                    <b>
+                                        {{=centro.upper()}}
+                                    </b>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                            margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>MAESTRÍA,
+                                    ESPECIALIDAD O DIPLOMADO:
+                                    <b>{{=edicion_actual.id_edicion.id_maestria.nombre}}</b>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD style='mso-ansi-language:
+                            ES-TRAD'>
+    
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=center style='margin-top:0in;margin-right:12.3pt;
+                            margin-bottom:0in;margin-left:12.7pt;margin-bottom:.0001pt;text-align:center'><b
+                                    style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='mso-ansi-language:
+                            ES-TRAD'>
+                                        <o:p>&nbsp;</o:p>
+                                    </span></b></p>
+    
+                            <p class=MsoNormal align=center style='margin-top:0in;margin-right:12.3pt;
+                            margin-bottom:0in;margin-left:12.7pt;margin-bottom:.0001pt;text-align:center'><b
+                                    style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='mso-ansi-language:
+                            ES-TRAD'>DICTAMEN DE AUTORIZACIÓN DE EVALUACIÓN DE SUFICIENCIA No. XX/20XX </span></b><span
+                                    lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                            margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>POR CUANTO</span></b><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>: El Comité Académico de la Maestría,
+                                    Especialidad o <o:p></o:p></span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD style='mso-ansi-language:
+                            ES-TRAD'>Diplomado antes mencionada incluyó como matrícula al compañero
+                                    <b>
+                                        {{=' '.join([estudiante.nombre, estudiante.apellido1, estudiante.apellido2])}}
+                                    </b>
+                                    en la edición
+                                    <b>
+                                        {{=edicion_actual.id_edicion.numero}}
+                                    </b>
+                                    de este programa iniciada
+                                    con fecha
+                                    <b>{{=edicion_actual.id_edicion.fecha_inicio.strftime('%d/%m/%Y')}}</b>.
+                                    <span style='mso-spacerun:yes'>  </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>POR CUANTO</span></b><span
+                                    lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>: El compañero mencionado
+                                    presentó la solicitud escrita de realizar exámenes de suficiencia en
+                                    actividades del programa. <o:p></o:p></span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>POR CUANTO:</span></b><span
+                                    lang=ES-TRAD style='mso-ansi-language:ES-TRAD'> El Comité Académico analizó la
+                                    conveniencia de que el compañero demuestre los conocimientos que manifiesta
+                                    tener en los cursos o entrenamientos de posgrado solicitados. <o:p></o:p></span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>POR TANTO</span></b><span
+                                    lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>: El Comité Académico de la
+                                    Maestría, Especialidad o Diplomado antes mencionada en uso de las facultades
+                                    que le están conferidas: <o:p></o:p></span></p>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=center style='margin-top:0in;margin-right:4.7pt;
+                            margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b style='mso-bidi-font-weight:
+                            normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>DICTAMINA </span></b><span
+                                    lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=center style='margin-top:0in;margin-right:.1pt;
+                            margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                            text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'><span
+                                            style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>PRIMERO</span></b><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>: Autorizar la realización de
+                                    evaluación de suficiencia en los siguientes cursos o entrenamientos que forman
+                                    parte del programa de esta edición:<span style='mso-spacerun:yes'>  </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <table class=TableGrid border=0 cellspacing=0 cellpadding=0 width=581 style='width:435.95pt;margin-left:-5.4pt;border-collapse:collapse;mso-yfti-tbllook:
+                             1184;mso-padding-alt:0in 3.25pt 0in 5.4pt'>
+                                <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:14.3pt'>
+                                    <td width=45 valign=top style='width:33.7pt;border:solid black 1.0pt;
+                              mso-border-alt:solid black .5pt;padding:0in 3.25pt 0in 5.4pt;height:14.3pt'>
+                                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                              margin-bottom:0in;margin-left:1.1pt;margin-bottom:.0001pt;text-align:left;
+                              text-indent:0in;line-height:107%'><span class=SpellE><b style='mso-bidi-font-weight:
+                              normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Nro</span></b></span><b
+                                                style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='mso-ansi-language:
+                              ES-TRAD'> </span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                    <td width=433 valign=top style='width:324.95pt;border:solid black 1.0pt;
+                              border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                              padding:0in 3.25pt 0in 5.4pt;height:14.3pt'>
+                                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:2.1pt;
+                              margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                              text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                                    style='mso-ansi-language:ES-TRAD'>Curso o Entrenamiento de
+                                                    Posgrado </span></b><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                    <td width=103 valign=top style='width:77.3pt;border:solid black 1.0pt;
+                              border-left:none;mso-border-left-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                              padding:0in 3.25pt 0in 5.4pt;height:14.3pt'>
+                                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:2.2pt;
+                              margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                              text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                                    style='mso-ansi-language:ES-TRAD'>Créditos </span></b><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                </tr>
+                                <tr v-for="(item, index) in select_actividades" :key="item.id"
+                                    style='mso-yfti-irow:1;height:.2in'>
+                                    <td width=45 valign=top style='width:33.7pt;border:solid black 1.0pt;
+                              border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                              padding:0in 3.25pt 0in 5.4pt;height:.2in'>
+                                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                              text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US
+                                                style='mso-ansi-language:ES-TRAD'><span
+                                                    style='mso-spacerun:yes'>[[index + 1]]</span></span><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                    <td width=433 valign=top style='width:324.95pt;border-top:none;border-left:
+                              none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                              mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                              mso-border-alt:solid black .5pt;padding:0in 3.25pt 0in 5.4pt;height:.2in'>
+                                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                              text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'>
+                                                    [[item.actividad]]
+                                                </span>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                    <td width=103 valign=top style='width:77.3pt;border-top:none;border-left:
+                              none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                              mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                              mso-border-alt:solid black .5pt;padding:0in 3.25pt 0in 5.4pt;height:.2in'>
+                                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                              text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'>
+                                                    [[item.creditos]]
+                                                </span>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                </tr>
+                                <tr style='mso-yfti-irow:1;height:.2in'>
+                                    <td width=45 valign=top style='width:33.7pt;border:solid black 1.0pt;
+                              border-top:none;mso-border-top-alt:solid black .5pt;mso-border-alt:solid black .5pt;
+                              padding:0in 3.25pt 0in 5.4pt;height:.2in'>
+                                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                              text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US
+                                                style='mso-ansi-language:ES-TRAD'><span
+                                                    style='mso-spacerun:yes'> </span></span><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                    <td width=433 valign=top style='width:324.95pt;border-top:none;border-left:
+                              none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                              mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                              mso-border-alt:solid black .5pt;padding:0in 3.25pt 0in 5.4pt;height:.2in'>
+                                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                              text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                    <td width=103 valign=top style='width:77.3pt;border-top:none;border-left:
+                              none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+                              mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
+                              mso-border-alt:solid black .5pt;padding:0in 3.25pt 0in 5.4pt;height:.2in'>
+                                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                              text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                                <o:p></o:p>
+                                            </span></p>
+                                    </td>
+                                </tr>
+                            </table>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=EN-US
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span></span><span
+                                    lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                            margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>SEGUNDO:</span></b><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'> Informar de esto a la Secretaría Docente. <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><b style='mso-bidi-font-weight:normal'><span
+                                        lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>TERCERO:</span></b><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'> Informar de esto a los
+                                    profesores correspondientes, los que deben preparar el examen y publicar la
+                                    fecha de su realización, asentando su resultado en el acta correspondiente. <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.15pt;
+                            margin-left:.85pt'><b style='mso-bidi-font-weight:normal'><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>CUARTO: </span></b><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'>Orientar se coloque la fotocopia de este
+                                    documento en el expediente del estudiante señalado.<b style='mso-bidi-font-weight:
+                            normal'> </b>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                            margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD style='mso-ansi-language:
+                            ES-TRAD'>Dado en __________________________________ a los __ días del mes
+                                    ________________ de ______. <o:p></o:p></span></p>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                            text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span><span
+                                        style='mso-tab-count:1'>           </span><span style='mso-spacerun:yes'> </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:13.6pt;margin-bottom:
+                            0in;margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD
+                                    style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span>_____________________________
+                                    <span style='mso-tab-count:1'>   </span><span style='mso-spacerun:yes'>  </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                            <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                            margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Coordinador
+                                    del Comité Académico<span style='mso-spacerun:yes'>  </span>
+                                    <o:p></o:p>
+                                </span></p>
+    
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+{{block page_js}}
+
+<script>
+    const url_get_data = "{{=URL('actividad_edicion', 'api_get_actividades')}}"
+</script>
+
+{{include '_includes/vue/import_vue.html'}}
+{{include '_vue_components/dictamen/pg_05.html'}}
+
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+        /* Font Definitions */
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 1;
+        mso-generic-font-family: roman;
+        mso-font-format: other;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 0 0 0 0 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    span.SpellE {
+        mso-style-name: "";
+        mso-spl-e: yes;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 8.5in 11.0in;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+        mso-header-margin: .5in;
+        mso-footer-margin: .5in;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    /* Style Definitions */
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    table.TableGrid {
+        mso-style-name: TableGrid;
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-unhide: no;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 0in 0in 0in;
+        mso-para-margin: 0in;
+        mso-para-margin-bottom: .0001pt;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: "Times New Roman";
+        mso-fareast-theme-font: minor-fareast;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'dictamen_suficiencia', docStyle);
+    }
+</script>
+{{end}}
+
+{{block datatable}}
+{{end}}

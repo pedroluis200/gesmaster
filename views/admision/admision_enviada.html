@@ -1,0 +1,19 @@
+{{extend 'layout_admin.html'}}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">
+                <i class="fas fa-info-circle pr-2"></i>
+                Información
+            </h4>
+            <br>
+            <p>Sus datos se han enviado correctamente. Puede revisar el estado de la
+                admisión en el <a class="text-success" href="{{=URL('dashboard', 'index')}}">panel de inicio</a>.</p>
+            <hr>
+            <a href="{{=URL('dashboard', 'index')}}" class="btn btn-success">
+                <span class="fa fa-home"></span>
+                Panel de Inicio
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    .info h5 {
+        margin-bottom: 10px;
+        font-weight: normal !important;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    {{if auth.has_membership('Coordinador'):}}
+    <div class="col-md-8">
+        <a href="{{=URL('manage')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>
+
+        <a href="{{=URL('editar', args=actividad.id)}}" class="btn btn-success btn-rounded text-white mb-3">
+            <i class="fas fa-edit"></i>
+        </a>
+    </div>
+    {{pass}}
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Detalles actividad de esta edición</strong>
+            </div>
+            <div class="card-body">
+                <div class="mx-auto d-block info">
+                    <h5><strong>Nombre: </strong>{{=actividad.id_actividad.nombre}}</h5>
+                    <h5><strong>Tipo: </strong>{{=actividad.id_actividad.tipo}}</h5>
+                    <h5><strong>Créditos: </strong>{{=actividad.creditos}}</h5>
+                    <h5><strong>Fecha inicio: </strong>{{=actividad.fecha_inicio.strftime('%d/%m/%Y')}}</h5>
+                    <h5><strong>Fecha fin: </strong>{{=actividad.fecha_fin.strftime('%d/%m/%Y')}}</h5>
+                    <h5><strong>Profesor: </strong>
+                        {{=' '.join([actividad.id_profesor.first_name, actividad.id_profesor.last_name])}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

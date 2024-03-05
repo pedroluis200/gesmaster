@@ -1,0 +1,32 @@
+{{extend 'layout_front.html'}}
+
+<section class="bg-light" style="padding-top: 60px;" id="contact">
+    <div class="container px-5">
+        <div class="row gx-5 justify-content-between">
+            <div class="col-sm-8 col-md-4">
+                <div class="px-5 px-sm-0"><img class="img-fluid rounded-pill"
+                        src="{{=URL('static', 'images/ediciones.svg')}}" alt="..." width="400px" /></div>
+            </div>
+            <div class="col-12 col-lg-7">
+                <h3 class="display-4 lh-1 mb-4">Ediciones disponibles</h3>
+                <p class="lead fw-normal text-muted mb-5 mb-lg-0">
+                    En este apartado se muestran que programas de maestría cuentan con ediciones abiertas a matrícula.
+                </p>
+
+                {{if not maestrias:}}
+                <h3 class="pt-4">
+                    No hay ediciones abiertas
+                </h3>
+                {{pass}}
+
+                <ul class="pl-4">
+                    {{for m in maestrias:}}
+                    <li>
+                        <h4 class="mt-4">{{=m.maestria.nombre}}</h4>
+                    </li>
+                    {{pass}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

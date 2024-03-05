@@ -1,0 +1,580 @@
+{{extend 'layout_admin.html'}}
+
+{{block head}}
+<style>
+    @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 1;
+        mso-generic-font-family: roman;
+        mso-font-format: other;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 0 0 0 0 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    h2 {
+        mso-style-priority: 9;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        mso-style-link: "Título 2 Car";
+        mso-style-next: Normal;
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: .15pt;
+        margin-left: .6pt;
+        text-indent: -.5pt;
+        line-height: 107%;
+        mso-pagination: widow-orphan lines-together;
+        page-break-after: avoid;
+        mso-outline-level: 2;
+        font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.Ttulo2Car {
+        mso-style-name: "Título 2 Car";
+        mso-style-priority: 9;
+        mso-style-unhide: no;
+        mso-style-locked: yes;
+        mso-style-link: "Título 2";
+        font-family: "Arial", "sans-serif";
+        mso-ascii-font-family: Arial;
+        mso-fareast-font-family: Arial;
+        mso-hansi-font-family: Arial;
+        mso-bidi-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        font-weight: bold;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.SpellE {
+        mso-style-name: "";
+        mso-spl-e: yes;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 595.3pt 841.9pt;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+        mso-header-margin: 35.4pt;
+        mso-footer-margin: 35.4pt;
+        mso-even-header: url("pg-20_archivos/header.htm") eh1;
+        mso-header: url("pg-20_archivos/header.htm") h1;
+        mso-first-header: url("pg-20_archivos/header.htm") fh1;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+</style>
+{{end head}}
+
+<div class="row">
+    <div class="col-6">
+        <a href="{{=URL('dictamen_certificado')}}" class="btn mb-3 btn-rounded btn-info">
+            <span><i class="fas fa-arrow-left"></i> </span>
+        </a>
+        <button class="btn btn-success mb-3" onclick="exportDoc()">
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+        </button>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-primary mb-3" href="{{=URL('static/modelos', 'pg-20.docx')}}" target="_blank">
+            <i class="fa fa-file-text mr-2"></i>
+            Modelo PG-20 sin datos
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title mb-3">Certificado del curso, entrenamiento y diplomado - Modelo PG 20</strong>
+            </div>
+
+            <div class="card-body table-responsive">
+                <div id="exportContent" contentEditable="true" class="mt-2 row" style="margin: auto;width: 600px;">
+                    <div class=WordSection1>
+
+                        <h2 style='margin:0in;margin-bottom:.0001pt;text-indent:0in'><span lang=ES-TRAD style='font-size:14.0pt;mso-bidi-font-size:11.0pt;line-height:
+                        107%;mso-ansi-language:ES-TRAD'>PG-20<span style='mso-spacerun:yes'>  </span></span><span
+                                lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></h2>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:4.95pt;
+                        margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                    <o:p>&nbsp;</o:p>
+                                </span></b></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:4.95pt;
+                        margin-bottom:.55pt;margin-left:2.0pt;text-align:center'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>CERTIFICADO DEL
+                                    CURSO, ENTRENAMIENTO Y DIPLOMADO. </span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=center style='margin:0in;margin-bottom:.0001pt;
+                        text-align:center;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=center style='margin-top:0in;margin-right:.05in;
+                        margin-bottom:0in;margin-left:0in;margin-bottom:.0001pt;text-align:center;
+                        text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:normal'><u
+                                    style='text-underline:black'><span lang=ES-TRAD
+                                        style='mso-ansi-language:ES-TRAD'>CERTIFICADO</span></u></b><b
+                                style='mso-bidi-font-weight:normal'><span lang=ES-TRAD style='mso-ansi-language:
+                        ES-TRAD'> </span></b><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:0in;
+                        margin-bottom:.15pt;margin-left:.85pt;text-align:left;line-height:109%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>Se otorga a<b style='mso-bidi-font-weight:
+                        normal'>:
+                                    {{=' '.join([estudiante.nombre, estudiante.apellido1, estudiante.apellido2])}}
+                                </b>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:3.0pt;
+                        margin-bottom:.5pt;margin-left:.85pt;text-align:left'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>Por haber aprobado, con una calificación de <o:p>
+                                </o:p></span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:3.0pt;
+                        margin-bottom:.5pt;margin-left:.85pt;text-align:left'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p>&nbsp;</o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin-top:0in;margin-right:3.0pt;
+                        margin-bottom:.5pt;margin-left:.85pt;text-align:left'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>___________________________________ <o:p></o:p></span>
+                        </p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>El
+                                _______________________________________________________________ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Con un
+                                total de {{=estudiante.creditos}} créditos, comprendido entre los días
+                                {{=edicion_actual.id_edicion.fecha_inicio.day}} de
+                                {{=meses[edicion_actual.id_edicion.fecha_inicio.month - 1]}} al
+                                {{=edicion_actual.id_edicion.fecha_fin.day}} de
+                                {{=meses[edicion_actual.id_edicion.fecha_fin.month - 1]}} <span class=SpellE>de</span>
+                                ______, desarrollado por
+                                el Centro: <b>{{=centro}}</b>
+                                <o:p></o:p>
+                            </span></p>
+
+
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p>&nbsp;</o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Dado en
+                                __________, el día ____ de _____________________ <span class=SpellE>de</span>__________.
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                        margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD style='mso-ansi-language:
+                        ES-TRAD'>__________________________<span style='mso-spacerun:yes'>                             
+                                </span>______________________<span style='mso-spacerun:yes'>      </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                        margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD style='mso-ansi-language:
+                        ES-TRAD'>Decano o Director<span style='mso-spacerun:yes'>                                    
+                                </span><span style='mso-spacerun:yes'>                           </span>Secretario <o:p>
+                                </o:p></span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:.5pt;
+                        margin-left:.85pt'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>Tomo
+                                _______ Folio ________ No. _________ <o:p></o:p></span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'><span style='mso-spacerun:yes'> </span>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal style='margin-top:0in;margin-right:3.0pt;margin-bottom:0in;
+                        margin-left:.85pt;margin-bottom:.0001pt'><span lang=ES-TRAD style='mso-ansi-language:
+                        ES-TRAD'>NOTA: Si al modelo se le pone un logotipo con datos del centro se
+                                puede omitir el tópico “____, desarrollado por el Centro______”. También se
+                                pueden diseñar modelos independientes para cada actividad, ajustando los datos
+                                correspondientes. <o:p></o:p></span></p>
+
+                        <p class=MsoNormal align=left style='margin:0in;margin-bottom:.0001pt;
+                        text-align:left;text-indent:0in;line-height:107%'><b style='mso-bidi-font-weight:
+                        normal'><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'><span
+                                        style='mso-spacerun:yes'> </span></span></b><span lang=ES-TRAD
+                                style='mso-ansi-language:ES-TRAD'>
+                                <o:p></o:p>
+                            </span></p>
+
+                        <p class=MsoNormal><span lang=ES-TRAD style='mso-ansi-language:ES-TRAD'>
+                                <o:p>&nbsp;</o:p>
+                            </span></p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{block page_js}}
+{{include '_includes/doc/toDoc.html'}}
+
+<script>
+    const docStyle = `
+    <style>
+        @font-face {
+        font-family: "Cambria Math";
+        panose-1: 2 4 5 3 5 4 6 3 2 4;
+        mso-font-charset: 1;
+        mso-generic-font-family: roman;
+        mso-font-format: other;
+        mso-font-pitch: variable;
+        mso-font-signature: 0 0 0 0 0 0;
+    }
+
+    /* Style Definitions */
+    p.MsoNormal,
+    li.MsoNormal,
+    div.MsoNormal {
+        mso-style-unhide: no;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: 5.65pt;
+        margin-left: .5pt;
+        text-align: justify;
+        text-indent: -.5pt;
+        line-height: 103%;
+        mso-pagination: widow-orphan;
+        font-size: 12.0pt;
+        mso-bidi-font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+    }
+
+    h2 {
+        mso-style-priority: 9;
+        mso-style-qformat: yes;
+        mso-style-parent: "";
+        mso-style-link: "Título 2 Car";
+        mso-style-next: Normal;
+        margin-top: 0in;
+        margin-right: 0in;
+        margin-bottom: .15pt;
+        margin-left: .6pt;
+        text-indent: -.5pt;
+        line-height: 107%;
+        mso-pagination: widow-orphan lines-together;
+        page-break-after: avoid;
+        mso-outline-level: 2;
+        font-size: 11.0pt;
+        font-family: "Arial", "sans-serif";
+        mso-fareast-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        mso-fareast-language: EN-US;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.Ttulo2Car {
+        mso-style-name: "Título 2 Car";
+        mso-style-priority: 9;
+        mso-style-unhide: no;
+        mso-style-locked: yes;
+        mso-style-link: "Título 2";
+        font-family: "Arial", "sans-serif";
+        mso-ascii-font-family: Arial;
+        mso-fareast-font-family: Arial;
+        mso-hansi-font-family: Arial;
+        mso-bidi-font-family: Arial;
+        color: black;
+        mso-ansi-language: EN-US;
+        font-weight: bold;
+        mso-bidi-font-weight: normal;
+    }
+
+    span.SpellE {
+        mso-style-name: "";
+        mso-spl-e: yes;
+    }
+
+    .MsoChpDefault {
+        mso-style-type: export-only;
+        mso-default-props: yes;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-fareast-font-family: Calibri;
+        mso-fareast-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+
+    .MsoPapDefault {
+        mso-style-type: export-only;
+        margin-bottom: 8.0pt;
+        line-height: 107%;
+    }
+
+    @page WordSection1 {
+        size: 595.3pt 841.9pt;
+        margin: 70.85pt 85.05pt 70.85pt 85.05pt;
+        mso-header-margin: 35.4pt;
+        mso-footer-margin: 35.4pt;
+        mso-even-header: url("pg-20_archivos/header.htm") eh1;
+        mso-header: url("pg-20_archivos/header.htm") h1;
+        mso-first-header: url("pg-20_archivos/header.htm") fh1;
+        mso-paper-source: 0;
+    }
+
+    div.WordSection1 {
+        page: WordSection1;
+    }
+
+    table.MsoNormalTable {
+        mso-style-name: "Tabla normal";
+        mso-tstyle-rowband-size: 0;
+        mso-tstyle-colband-size: 0;
+        mso-style-noshow: yes;
+        mso-style-priority: 99;
+        mso-style-parent: "";
+        mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+        mso-para-margin-top: 0in;
+        mso-para-margin-right: 0in;
+        mso-para-margin-bottom: 8.0pt;
+        mso-para-margin-left: 0in;
+        line-height: 107%;
+        mso-pagination: widow-orphan;
+        font-size: 11.0pt;
+        font-family: "Calibri", "sans-serif";
+        mso-ascii-font-family: Calibri;
+        mso-ascii-theme-font: minor-latin;
+        mso-hansi-font-family: Calibri;
+        mso-hansi-theme-font: minor-latin;
+        mso-bidi-font-family: "Times New Roman";
+        mso-bidi-theme-font: minor-bidi;
+        mso-fareast-language: EN-US;
+    }
+    </style>
+    `;
+
+    function exportDoc() {
+        exportHTML('exportContent', 'certificado', docStyle);
+    }
+</script>
+{{end page_js}}
+
+{{block datatable}}
+{{end}}
