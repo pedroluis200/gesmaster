@@ -20,24 +20,17 @@ Este es un sistema de gestión diseñado para universidades que deseen administr
 
 git clone <URL_del_repositorio>
 
-markdown
-
 Reemplaza `<URL_del_repositorio>` con la URL del repositorio.
 
 2. Instala las dependencias necesarias ejecutando:
 
 pip install -r requirements.txt
 
-markdown
-
-
 3. Configura el sistema de acuerdo a tus necesidades editando los archivos de configuración correspondientes.
 
 4. Inicia el servidor ejecutando:
 
 python manage.py runserver
-
-markdown
 
 El sistema estará disponible en la dirección local `http://localhost:8000`.
 
