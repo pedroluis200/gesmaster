@@ -85,16 +85,6 @@ def register():
 
     return dict(form=form)
 
-def register_user_ldap(username, password):
-    # Implementa la lógica para registrar usuarios en el servidor LDAP
-    # Retorna True si el registro es exitoso, False en caso contrario
-    return False  # Implementa la lógica adecuada aquí
-
-@auth.requires_login()
-def logout():
-    auth.logout()
-    return dict()
-
 @auth.requires_login()
 def perfil():
     usuario = db.auth_user(auth.user.id
@@ -102,6 +92,10 @@ def perfil():
 
     rol = db(db.auth_membership.user_id ==
              usuario.id).select().first().group_id.role
+
+    if request.vars.action == 'logout':
+        auth.logout()
+        redirect(URL('usuario', 'login'))
 
     form = SQLFORM.factory(Field("password", "password", label=T("Nueva Contraseña"), requires=[IS_NOT_EMPTY(), CRYPT()]),
                            Field("repeat", "password", label=T("Repetir contraseña"), requires=[
@@ -123,11 +117,6 @@ def perfil():
             'El formulario contiene errores'))
 
     return dict(usuario=usuario, rol=rol, form=form)
-
-def update_password_ldap(username, password):
-    # Implementa la lógica para actualizar la contraseña en el servidor LDAP
-    # Retorna True si la actualización es exitosa, False en caso contrario
-    return False  # Implementa la lógica adecuada aquí
 
 @auth.requires_membership('Administrador')
 def manage():
